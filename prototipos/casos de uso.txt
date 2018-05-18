@@ -1,0 +1,17 @@
+
+casos de uso
+
+1. cadastro de projetos
+
+RN: deve ser informado nome, data de início, previsão de términio, data real de términio, gerente responsável, orçamento total, status(em análise, análise realizada, análise aprovada, iniciado, planejado, em andamento, encerrado cancelado), descrição, risco(baixo, médio, alto)
+RN: acesso: líder escritório de processos
+
+RN: sistema permite alterar status
+se status -> análise aprovada, deve ser preenchida justificativa
+se status -> cancelado, deve ser preenchida justificativa
+RN: registrar último responsável e a data da alteração
+
+2. atribuição de equipe a projetos
+
+RN: cadastrar e gerenciar nome de membros da equipe de projetos
+RN: acesso: líder de projeto
