@@ -1,0 +1,108 @@
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
+  <h1>Novo Projeto</h1>
+  <small>Líder do Escritório de Projetos</small>
+  <hr>
+  <h2>Info</h2>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </div>
+      <div class="row">
+          <div class="col-4">
+              <div class="form-group">
+                  <label>Data de Início</label>
+                  <input class="form-control datepicker">
+              </div>
+          </div>
+          <div class="col-4">
+              <div class="form-group">
+                  <label>Data de Previsão de Términio</label>
+                  <input class="form-control datepicker">
+              </div>
+          </div>
+          <div class="col-4">
+              <div class="form-group">
+                  <label>Data <b>real</b> de Téminio</label>
+                  <input class="form-control datepicker">
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Orçamento</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Riscos</label>
+                <select class="form-control custom-select">
+                    <option>Baixo risco</option>
+                    <option>Médio risco</option>
+                    <option>Alto risco</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Status</label>
+                <select class="form-control custom-select">
+                    <option>Em análise</option>
+                    <option>Análise realizada</option>
+                    <option>Análise aprovada</option>
+                    <option>Iniciado</option>
+                    <option>Planejado</option>
+                    <option>Em andamento</option>
+                    <option>Encerrado</option>
+                    <option>Cancelado</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Justificativa de mudança de Status</label>
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary">Filtrar</button>
+                <button type="button" class="btn btn-secondary">Limpar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -->
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        language: 'pt-BR'
+    });
+  })
+</script>

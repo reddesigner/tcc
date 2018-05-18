@@ -1,0 +1,83 @@
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
+  <h1>Lista de Projetos</h1>
+  <hr>
+  <h2>Filtros</h2>
+  <div class="row">
+    <div class="col-4">
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <button type="button" class="btn btn-primary">Filtrar</button>
+            <button type="button" class="btn btn-secondary">Limpar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-8">
+
+    </div>
+  </div>
+  <hr>
+  <h2>
+    Lista
+    <div class="float-right"><button type="button" class="btn btn-primary">Primary</button></div>
+  </h2>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Projeto</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projeto of projetoList">
+          <td>{{projeto._id}} - {{projeto.name}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Deseja realmente excluir este item?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Excluir</button>
+    </div>
+    </div>
+  </div>
+</div>
