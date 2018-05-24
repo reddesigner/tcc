@@ -10,3 +10,18 @@ footer {
 .container {
   min-height: calc(100vh - 120px);
 }
+
+
+/* - */
+
+.w1p {    width: 1%; }
+.w1of5,
+.w20p {   width: 20%; }
+.w1of4,
+.w25p {   width: 25%; }
+.w2of5 {  width: 40%; }
+.w50p {   width: 50%; }
+.w3of5 {  width: 60%; }
+.w4of5 {  width: 80%; }
+
+/* - */

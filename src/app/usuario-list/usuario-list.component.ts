@@ -24,7 +24,6 @@ export class UsuarioListComponent implements OnInit {
   }
 
   getUsuarios() {
-
     const that = this;
     this.usuarioService.getUsuarios().subscribe(function(usu) {
       that.usuariosList = usu;
@@ -33,10 +32,8 @@ export class UsuarioListComponent implements OnInit {
   }
 
   public onSelectUsuario(idUsuario: number) {
-
     // redirecionar para usuario-detail
     this.route.navigate(['/usuario/detail/' + idUsuario]);
-
   }
 
 }

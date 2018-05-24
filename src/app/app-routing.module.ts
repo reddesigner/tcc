@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
+
 import { ProjetoListComponent } from './projeto-list/projeto-list.component';
 import { ProjetoDetailComponent } from './projeto-detail/projeto-detail.component';
 import { ProjetoCreateComponent } from './projeto-create/projeto-create.component';
+
 import { ProjetoIndicadorComponent } from './projeto-indicador/projeto-indicador.component';
+import { ProjetoIndicadorFaseComponent } from './projeto-indicador-fase/projeto-indicador-fase.component';
 import { ProjetoEquipeComponent } from './projeto-equipe/projeto-equipe.component';
 
 import { IndicadorListComponent } from './indicador-list/indicador-list.component';
@@ -24,9 +28,11 @@ import { RelatorioListComponent } from './relatorio-list/relatorio-list.componen
 const routes: Routes = [
   { path: 'projeto', component: ProjetoListComponent},
   { path: 'projeto/create', component: ProjetoCreateComponent},
-  { path: 'projeto/detail', component: ProjetoDetailComponent},
-  { path: 'projeto/indicador', component: ProjetoIndicadorComponent},
-  { path: 'projeto/equipe', component: ProjetoEquipeComponent},
+  { path: 'projeto/detail/:id', component: ProjetoDetailComponent},
+
+  { path: 'projeto-indicador', component: ProjetoIndicadorComponent},
+  { path: 'projeto-indicador-fases', component: ProjetoIndicadorFaseComponent},
+  { path: 'projeto-equipe', component: ProjetoEquipeComponent},
 
   { path: 'usuario', component: UsuarioListComponent },
   { path: 'usuario/create', component: UsuarioCreateComponent },
@@ -39,7 +45,8 @@ const routes: Routes = [
 
   { path: 'relatorio', component: RelatorioListComponent },
 
-  { path: '', redirectTo: '/', pathMatch: 'full' }
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

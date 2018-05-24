@@ -44,14 +44,17 @@
       <thead>
         <tr>
           <th>Projeto</th>
-          <th>Ações</th>
+          <th class="w20p">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let projeto of projetoList">
           <td>{{projeto._id}} - {{projeto.name}}</td>
           <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-default" (click)="onSelectEditProjeto(projeto._id)">
+              editar
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
               excluir
             </button>
           </td>
@@ -67,16 +70,16 @@
     <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onDeselectDeleteOkProjeto()">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        Deseja realmente excluir este item?
+        Deseja realmente excluir este Projeto?
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Excluir</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onDeselectDeleteOkProjeto()">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">Excluir</button>
     </div>
     </div>
   </div>

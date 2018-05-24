@@ -1,6 +1,6 @@
 export class Projeto {
 
-  _id: number;
+  id: number;
   name: string;
   dateStart: Date;
   datePrevist: Date;
