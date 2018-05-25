@@ -15,6 +15,7 @@ import { ProjetoEquipeComponent } from './projeto-equipe/projeto-equipe.componen
 
 import { IndicadorListComponent } from './indicador-list/indicador-list.component';
 import { IndicadorCreateComponent } from './indicador-create/indicador-create.component';
+import { IndicadorDetailComponent } from './indicador-detail/indicador-detail.component';
 
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { UsuarioCreateComponent } from './usuario-create/usuario-create.component';
@@ -30,9 +31,9 @@ const routes: Routes = [
   { path: 'projeto/create', component: ProjetoCreateComponent},
   { path: 'projeto/detail/:id', component: ProjetoDetailComponent},
 
-  { path: 'projeto-indicador', component: ProjetoIndicadorComponent},
-  { path: 'projeto-indicador-fases', component: ProjetoIndicadorFaseComponent},
-  { path: 'projeto-equipe', component: ProjetoEquipeComponent},
+  { path: 'projeto/indicador', component: ProjetoIndicadorComponent},
+  { path: 'projeto/indicador-fase', component: ProjetoIndicadorFaseComponent},
+  { path: 'projeto/equipe', component: ProjetoEquipeComponent},
 
   { path: 'usuario', component: UsuarioListComponent },
   { path: 'usuario/create', component: UsuarioCreateComponent },
@@ -40,8 +41,9 @@ const routes: Routes = [
 
   { path: 'indicador', component: IndicadorListComponent },
   { path: 'indicador/create', component: IndicadorCreateComponent },
+  { path: 'indicador/detail/:id', component: IndicadorDetailComponent },
 
-  { path: 'permisao', component: PermissaoListComponent },
+  { path: 'permissao', component: PermissaoListComponent },
 
   { path: 'relatorio', component: RelatorioListComponent },
 

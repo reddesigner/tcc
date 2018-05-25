@@ -1,3 +1,28 @@
-<p>
-  indicador-detail works!
-</p>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/indicador">Indicadores</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Detalhes</li>
+    </ol>
+  </nav>
+      <h1>Detalhes do Indicador</h1>
+      <small>Líder do Escritório de Projetos</small>
+  <hr>
+  <h2>Info</h2>
+  <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label class="form">Nome</label>
+                  <span class="form-control-plaintext">{{indicadorDetail.name}}</span>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col">
+              <div class="form-group">
+                  <button type="button" class="btn btn-primary" (click)="goBack()">Voltar</button>
+              </div>
+          </div>
+      </div>
+</div>

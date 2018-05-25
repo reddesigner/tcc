@@ -58,7 +58,7 @@
               editar
             </button>
             &nbsp;
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteIndicador(indicador.id)">
               excluir
             </button>
           </td>
@@ -83,27 +83,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Excluir</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSelectDeleteOkIndicador()">Excluir</button>
         </div>
         </div>
     </div>
-</div>
-
-<button type="button" class="btn btn-default" data-toggle="modal" data-target="#msgModal">
-  modal msg test
-</button>
-<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="alert alert-success" role="alert" style="margin-bottom: 0">
-        <div class="float-left" style="margin-top: 1rem">
-        <h4>Titulo da msg</h4>
-        <p>A simple success alert—check it out!</p>
-        </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-  </div>
 </div>

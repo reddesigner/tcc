@@ -7,6 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Indicador } from '../_models/indicador.model';
 
+import { MessageService } from '../_controllers/message/service/message.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +23,8 @@ export class IndicadorService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private message: MessageService
   ) { }
 
   // listar todos
@@ -43,19 +46,32 @@ export class IndicadorService {
   // inserir novo
   postIndicador(indicador: Indicador): Observable<Indicador> {
     return this.http.post<Indicador>(this.indicadoresApiUrl, indicador, this.httpOptions).pipe(
-      tap(ind => console.log('TAP: gravando novo indicador no banco...', ind)),
+      tap(ind => {
+        console.log('TAP: gravando novo indicador no banco...', ind);
+        // foi um sucesso!
+        this.message.success(`O indicador ${ind.name} foi inserido com sucesso`, true);
+      }),
       catchError(this.handleError<Indicador>('postIndicador'))
     );
   }
 
   // editar
   putIndicador(indicador: Indicador): Observable<Indicador> {
-    return this.http.put<Indicador>(this.indicadoresApiUrl, indicador, this.httpOptions);
+    return this.http.put<Indicador>(this.indicadoresApiUrl, indicador, this.httpOptions).pipe(
+      tap(),
+      catchError(this.handleError<Indicador>('putIndicador'))
+    );
   }
 
   // excluir
   deleteIndicador(id: number) {
-    return this.http.delete<Indicador>(this.indicadoresApiUrl + '/' + id, this.httpOptions);
+    return this.http.delete<Indicador>(this.indicadoresApiUrl + '/' + id, this.httpOptions).pipe(
+      tap(() => {
+        console.log('sucesso na exclusão!');
+        this.message.error(`O indicador foi excluído com sucesso`, true);
+      }),
+      catchError(this.handleError<Indicador>('deleteIndicador'))
+    );
   }
 
   private log(message: string): void {
@@ -63,13 +79,12 @@ export class IndicadorService {
     console.log(message);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
+  private handleError<T>(operation = 'Operação', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} falhou: ${error.message}`);
+      this.message.error(`${operation} falhou: ${error.message}`);
+      // retorna um resultado vazio para app continuar rodando
       return of(result as T);
     };
   }

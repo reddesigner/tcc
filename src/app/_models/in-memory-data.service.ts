@@ -36,7 +36,14 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 4, name: 'Equipamento' }
     ];
 
-    return { projetos, usuarios, indicadores };
+    const permissoes = [
+      { id: 1, view: 'Indicadores', route: '/indicador', role: [{ role: 'admin' }, { role: 'manager'}] },
+      { id: 2, view: 'Projetos', route: '/projeto', role: [{ role: 'admin' }] },
+      { id: 3, view: 'Projetos & Indicadores', route: '/projeto-indicador', role: [{ role: 'admin' }] },
+      { id: 4, view: 'Projetos, Indicadores & Fases', route: '/projeto-indicador-fase', role: [{ role: 'teamleader' }] }
+    ];
+
+    return { projetos, usuarios, indicadores, permissoes };
   }
 
 }

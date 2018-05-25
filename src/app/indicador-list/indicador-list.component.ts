@@ -45,20 +45,30 @@ export class IndicadorListComponent implements OnInit {
   }
 
   // grupo de funções para deletar (confirmação no popup)
-  public onSelectDeleteProjeto(idProjeto: number): void {
-    console.log('projeto-list.componente onSelectDeleteProjeto()');
-    this.deleteIndicadorWait = idProjeto;
+  public onSelectDeleteIndicador(idIndicador: number): void {
+    console.log('indicador-list.componente onSelectDeleteIndicador()');
+    this.deleteIndicadorWait = idIndicador;
   }
 
-  public onSelectDeleteOkProjeto() {
+  public onSelectDeleteOkIndicador() {
     if (this.deleteIndicadorWait) {
-      // chama serviço para deletar Projeto
-      this.indicadorService.deleteIndicador(this.deleteIndicadorWait);
-      this.deleteIndicadorWait = null;
+      // chama serviço para deletar indicador
+      this.indicadorService.deleteIndicador(this.deleteIndicadorWait).subscribe(
+        () => {
+          console.log('voltou do DELETE indicador');
+          this.indicadorList = this.indicadorList.filter(el => {
+            console.log('el.id ', el.id);
+            console.log('deleteIndicadorWait: ', this.deleteIndicadorWait);
+            return el.id !== this.deleteIndicadorWait;
+          });
+          this.deleteIndicadorWait = null;
+        }
+      );
+      // this.deleteIndicadorWait = null;
     }
   }
 
-  public onDeselectDeleteOkProjeto() {
+  public onDeselectDeleteOkIndicador() {
     this.deleteIndicadorWait = null;
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 import { Indicador } from '../_models/indicador.model';
 
@@ -16,7 +17,8 @@ export class IndicadorCreateComponent implements OnInit {
   public newIndicador = new Indicador();
 
   constructor(
-    private indicadorService: IndicadorService
+    private indicadorService: IndicadorService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -25,8 +27,15 @@ export class IndicadorCreateComponent implements OnInit {
   onNewIndicator() {
     console.log('o objeto indicador é:', this.newIndicador);
     this.indicadorService.postIndicador(this.newIndicador).subscribe(
-      () => { console.log('a promessa voltou para componente indicador-create'); }
+      () => {
+        console.log('a promessa voltou para componente indicador-create');
+        this.goBack();
+      }
     );
+  }
+
+  private goBack(): void {
+    this.location.back();
   }
 
 }

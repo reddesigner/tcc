@@ -30,6 +30,7 @@ import { PermissaoListComponent } from './permissao-list/permissao-list.componen
 
 import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
 import { IndicadorDetailComponent } from './indicador-detail/indicador-detail.component';
+import { MessageComponent } from './_controllers/message/component/message.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { IndicadorDetailComponent } from './indicador-detail/indicador-detail.co
     ProjetoIndicadorComponent,
     ProjetoIndicadorFaseComponent,
     ProjetoEquipeComponent,
-    IndicadorDetailComponent
+    IndicadorDetailComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
