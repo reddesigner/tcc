@@ -1,3 +1,125 @@
-<p>
-  projeto-equipe works!
-</p>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/projeto">Projetos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Equipe do Projeto</li>
+    </ol>
+  </nav>
+  <h2>Equipe do Projeto</h2>
+  <hr>
+  <h3>Nome do Projeto: {{projetoRef.name}}</h3>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Equipe do Projeto</span>
+                <span class="badge badge-secondary badge-pill">{{projetoUsuariosAlocados.length}}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let usu of projetoUsuariosAlocados">
+                    <div>
+                        <h6 class="my-0">{{usu.name}}</h6>
+                        <small class="text-muted">{{usu.role}}</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary" (click)="removeUser(usu)">Retirar</button>
+                </li>
+              <!--
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Beltrano</h6>
+                        <small class="text-muted">Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Retirar</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Cicrano</h6>
+                        <small class="text-muted">Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Retirar</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code </h6>
+                        <small>Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Retirar</button>
+                </li>
+              -->
+              <!--
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>4</strong>
+                </li>
+              -->
+            </ul>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Membros disponíveis</span>
+                <span class="badge badge-secondary badge-pill">{{usuarioRef.length}}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let user of usuarioRef">
+                    <div>
+                        <h6 class="my-0">{{user.name}}</h6>
+                        <small class="text-muted">{{user.role}}</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary" (click)="insertUser(user)">Inserir</button>
+                </li>
+                <!--
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Beltrano</h6>
+                        <small class="text-muted">Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Inserir</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Cicrano</h6>
+                        <small class="text-muted">Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Inserir</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code fdjklfj jf dsfjklsdj fksdjfkl</h6>
+                        <small>Perfil</small>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Inserir</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>4</strong>
+                </li>
+                -->
+            </ul>
+            <!-- 
+            <form class="card p-2">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Promo code" type="text">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
+            </form>
+            -->
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <!-- -->
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="onSave()">Salvar</button>
+                &nbsp;
+                <button type="button" class="btn btn-secondary" (click)="goBack()">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>

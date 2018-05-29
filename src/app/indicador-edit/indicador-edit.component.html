@@ -1,0 +1,42 @@
+<div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/indicador">Indicadores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
+      </ol>
+    </nav>
+        <h2>Editção de Indicador</h2>
+        <small>Líder do Escritório de Projetos</small>
+    <hr>
+    <!--
+        <h2>Info</h2>
+    -->
+      <form #editForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="form">Nome</label>
+                    <input type="text" class="form-control" [(ngModel)]="indicadorEdit.name" name="name" #name="ngModel" required maxlength="30">
+                    <div [hidden]="name.valid || name.pristine"
+                      style="color: red">
+                      O nome do Indicador é obrigatório.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" [disabled]="!editForm.form.valid" (click)="onEditIndicator()">
+                      Salvar
+                    </button>
+                    &nbsp;
+                    <button type="button" class="btn btn-default" (click)="goBack()">
+                      Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+      </form>
+  </div>

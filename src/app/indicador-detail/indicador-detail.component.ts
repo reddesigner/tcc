@@ -27,7 +27,8 @@ export class IndicadorDetailComponent implements OnInit {
 
   getIndicadorUrl() {
     // pegar o usuário no serviço atraves do ID enviado como parametro
-    const id = +this.route.snapshot.paramMap.get('id'); // o + converte a string para number
+    const id = this.route.snapshot.paramMap.get('id'); // este get() é sempre de 'id'
+    // console.log('o id aqui é: ', id);
     // serviço get indicador
     this.indicador.getIndicadorById(id).subscribe(
       indicador => this.indicadorDetail = indicador

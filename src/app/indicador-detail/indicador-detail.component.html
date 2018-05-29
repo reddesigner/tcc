@@ -14,7 +14,7 @@
           <div class="col-6">
               <div class="form-group">
                   <label class="form">Nome</label>
-                  <span class="form-control-plaintext">{{indicadorDetail.name}}</span>
+                  <span class="form-control-plaintext" *ngIf="indicadorDetail">{{indicadorDetail.name}}</span>
               </div>
           </div>
       </div>

@@ -20,9 +20,9 @@
 </div>
 -->
 
-<div *ngIf="recievedMessage.length > 0" style="position: absolute; z-index: 9; top: 50px; left: 0; width: 100%; text-align: center; padding: 0 20%;">
-  <div *ngFor="let msg of recievedMessage" [class]="cssClass(msg)" alert-dismissable style="box-shadow: 0 0 30px rgba(0,0,0, .75); padding: 2rem 1rem">
-    {{msg.message}}
-    <a class="close" (click)="removeMessage(msg)">&times;</a>
+<div *ngIf="recievedMessage.length > 0" style="position: fixed; z-index: 9999; top: 50px; right: 50px; width: 360px;">
+  <div *ngFor="let msg of recievedMessage" [class]="cssClass(msg)" alert-dismissable style="box-shadow: 0 0 30px rgba(0,0,0, .75); padding: 2rem 1.4rem 2.2rem 1.8rem;">
+    <a class="close" (click)="removeMessage(msg)" style="margin-right: -14px; margin-top: -26px">&times;</a>
+    <b>{{msg.message}}</b>
   </div>
 </div>

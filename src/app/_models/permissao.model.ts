@@ -1,8 +1,9 @@
 export class Permissao {
-    id: number;
+    _id: string;
     view: string;
     route: string;
-    role: {
+    role: any;
+    /*role: {
         role: string
-    };
+    };*/
 }

@@ -1,3 +1,320 @@
-<p>
-  projeto-indicador-fase works!
-</p>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/projeto">Projetos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Indicadores do Projeto</li>
+    </ol>
+  </nav>
+  <h2>Indicadores do Projeto</h2>
+  <hr>
+
+  <h4>Nome do Projeto: {{projetoRef.name}}</h4>
+
+  <div class="accordion mt-3" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Fase 1 - Iniciação ou Conceito
+          <span class="badge badge-secondary badge-pill ml-2">{{projetoIndicadoresSelecionadosF1.length}}</span>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample"> <!-- class=show para iniciar aberto -->
+      <div class="card-body">
+        
+          <div class="row">
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores do Projeto - Fase 1</span>
+                    <span class="badge badge-secondary badge-pill">{{projetoIndicadoresSelecionadosF1.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind1 of projetoIndicadoresSelecionadosF1">
+                        <div>
+                            <h6 class="mt-2"><b>{{ind1.name}}</b></h6>
+                            <div class="row mt-4">
+                              <div class="col-5">
+                                <div class="form-group">
+                                  <label class="small">Valor</label>
+                                  <input type="text" class="form-control form-control-sm" [(ngModel)]="ind1.value">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-12">
+                                  <label class="small">Valores limítrofes (para controle do indicador)</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind1.min">
+                                </div>
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind1.max">
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div>
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="removeItem(ind1, 1)">&times;</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores disponíveis</span>
+                    <span class="badge badge-secondary badge-pill">{{indicadoresRef1.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind of indicadoresRef1">
+                        <div>
+                            <h6 class="my-0">{{ind.name}}</h6>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="insertItem(ind, 1)">Inserir</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Fase 2 - Elaboração
+          <span class="badge badge-secondary badge-pill ml-2">{{projetoIndicadoresSelecionadosF2.length}}</span>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        
+          <div class="row">
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores do Projeto - Fase 2</span>
+                    <span class="badge badge-secondary badge-pill">{{projetoIndicadoresSelecionadosF2.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind2 of projetoIndicadoresSelecionadosF2">
+                        <div>
+                            <h6 class="mt-2"><b>{{ind2.name}}</b></h6>
+                            <div class="row mt-4">
+                              <div class="col-5">
+                                <div class="form-group">
+                                  <label class="small">Valor</label>
+                                  <input type="text" class="form-control form-control-sm" [(ngModel)]="ind2.value">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-12">
+                                  <label class="small">Valores limítrofes (para controle do indicador)</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind2.min">
+                                </div>
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind2.max">
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div>
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="removeItem(ind2, 2)">&times;</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores disponíveis</span>
+                    <span class="badge badge-secondary badge-pill">{{indicadoresRef2.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind of indicadoresRef2">
+                        <div>
+                            <h6 class="my-0">{{ind.name}}</h6>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="insertItem(ind, 2)">Inserir</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Fase 3 - Construção
+          <span class="badge badge-secondary badge-pill ml-2">{{projetoIndicadoresSelecionadosF3.length}}</span>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        
+          <div class="row">
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores do Projeto - Fase 3</span>
+                    <span class="badge badge-secondary badge-pill">{{projetoIndicadoresSelecionadosF3.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind3 of projetoIndicadoresSelecionadosF3">
+                        <div>
+                            <h6 class="mt-2"><b>{{ind3.name}}</b></h6>
+                            <div class="row mt-4">
+                              <div class="col-5">
+                                <div class="form-group">
+                                  <label class="small">Valor</label>
+                                  <input type="text" class="form-control form-control-sm" [(ngModel)]="ind3.value">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-12">
+                                  <label class="small">Valores limítrofes (para controle do indicador)</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind3.min">
+                                </div>
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind3.max">
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div>
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="removeItem(ind3, 3)">&times;</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores disponíveis</span>
+                    <span class="badge badge-secondary badge-pill">{{indicadoresRef3.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind of indicadoresRef3">
+                        <div>
+                            <h6 class="my-0">{{ind.name}}</h6>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="insertItem(ind, 3)">Inserir</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Fase 4 - Transição
+          <span class="badge badge-secondary badge-pill ml-2">{{projetoIndicadoresSelecionadosF4.length}}</span>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+        
+          <div class="row">
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores do Projeto - Fase 4</span>
+                    <span class="badge badge-secondary badge-pill">{{projetoIndicadoresSelecionadosF4.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind4 of projetoIndicadoresSelecionadosF4">
+                        <div>
+                            <h6 class="mt-2"><b>{{ind4.name}}</b></h6>
+                            <div class="row mt-4">
+                              <div class="col-5">
+                                <div class="form-group">
+                                  <label class="small">Valor</label>
+                                  <input type="text" class="form-control form-control-sm" [(ngModel)]="ind4.value">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="col-12">
+                                  <label class="small">Valores limítrofes (para controle do indicador)</label>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind4.min">
+                                </div>
+                                <div class="col-5">
+                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind4.max">
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div>
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="removeItem(ind4, 4)">&times;</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Indicadores disponíveis</span>
+                    <span class="badge badge-secondary badge-pill">{{indicadoresRef4.length}}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind of indicadoresRef4">
+                        <div>
+                            <h6 class="my-0">{{ind.name}}</h6>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="insertItem(ind, 4)">Inserir</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+    <div class="row">
+      <!-- -->
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="onSave()">Salvar</button>
+                &nbsp;
+                <button type="button" class="btn btn-secondary" (click)="goBack()">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>

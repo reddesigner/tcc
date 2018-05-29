@@ -1,6 +1,4 @@
 export class Indicador {
-
-  id: number;
+  _id: string;
   name: string;
-
 }

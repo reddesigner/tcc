@@ -14,7 +14,7 @@ export class IndicadorCreateComponent implements OnInit {
 
   // criar um modelo baseado no model de indicador
   // este modelo ficará ligado ao formulário na view pelo ngModel
-  public newIndicador = new Indicador();
+  public newIndicador: Indicador = new Indicador();
 
   constructor(
     private indicadorService: IndicadorService,
@@ -25,16 +25,26 @@ export class IndicadorCreateComponent implements OnInit {
   }
 
   onNewIndicator() {
-    console.log('o objeto indicador é:', this.newIndicador);
+    // console.log('o objeto indicador é:', this.newIndicador);
     this.indicadorService.postIndicador(this.newIndicador).subscribe(
       () => {
-        console.log('a promessa voltou para componente indicador-create');
+        // console.log('a promessa voltou para componente indicador-create');
         this.goBack();
       }
     );
   }
 
-  private goBack(): void {
+  public onSubmit() {
+    // console.dir(this.newIndicador);
+    if (this.newIndicador.name && this.newIndicador.name != '') {
+      // console.log('s');
+      this.onNewIndicator();
+    } /*else {
+      // console.log('n');
+    }*/
+  }
+
+  public goBack(): void {
     this.location.back();
   }
 

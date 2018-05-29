@@ -14,6 +14,8 @@ export class UsuarioListComponent implements OnInit {
 
   public usuariosList: Usuario[];
 
+  private usuarioDeleteWait: string;
+
   constructor(
     private usuarioService: UsuarioService,
     private route: Router
@@ -25,15 +27,35 @@ export class UsuarioListComponent implements OnInit {
 
   getUsuarios() {
     const that = this;
-    this.usuarioService.getUsuarios().subscribe(function(usu) {
-      that.usuariosList = usu;
-    });
-
+    this.usuarioService.getUsuarios().subscribe(
+      function(usu) {
+        that.usuariosList = usu;
+      }
+    );
   }
 
-  public onSelectUsuario(idUsuario: number) {
-    // redirecionar para usuario-detail
-    this.route.navigate(['/usuario/detail/' + idUsuario]);
+  public onNewUsuario() {
+    this.route.navigate(['/usuario/create/']);
+  }
+
+  public onSelectUsuario(idUsuario: string) {
+    this.route.navigate(['/usuario/edit/' + idUsuario]);
+  }
+
+  public onDeleteUsuario(id: string) {
+    this.usuarioDeleteWait = id;
+  }
+
+  public onConfirmDeleteUsuario() {
+    this.usuarioService.deleteUsuario(this.usuarioDeleteWait).subscribe(
+      // retirar usuario excluído da lista!
+      // TODO deve haver uma verficação aqui se foi um sucesso... antes de tirar da lista
+      () => {
+        this.usuariosList = this.usuariosList.filter(el => {
+          return el._id !== this.usuarioDeleteWait;
+        });
+      }
+    );
   }
 
 }

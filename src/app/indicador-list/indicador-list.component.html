@@ -5,8 +5,10 @@
       <li class="breadcrumb-item active" aria-current="page">Indicadores</li>
     </ol>
   </nav>
+<!--
   <h1>Lista de Indicadores</h1>
   <hr>
+-->
 <!--
   <h2>Filtros</h2>
   <div class="row">
@@ -37,7 +39,7 @@
   <hr>
 -->
   <h2>
-    Lista
+    Lista de Indicadores
     <div class="float-right"><button type="button" class="btn btn-primary" (click)="onNewIndicator()">+ novo indicador</button></div>
   </h2>
   <div>
@@ -50,15 +52,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let indicador of indicadorList">
-          <td>{{indicador.id}}</td>
+        <tr *ngFor="let indicador of indicadorList; let i = index">
+          <td>{{i + 1}}</td>
           <td>{{indicador.name}}</td>
           <td>
-            <button type="button" class="btn btn-primary" (click)="onSelectEditIndicador(indicador.id)">
+            <button type="button" class="btn btn-primary btn-sm" (click)="onSelectEditIndicador(indicador._id)">
               editar
             </button>
             &nbsp;
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteIndicador(indicador.id)">
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteIndicador(indicador._id)">
               excluir
             </button>
           </td>
@@ -73,7 +75,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Confirmação de Exclusão</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -83,6 +85,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            &nbsp;
             <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSelectDeleteOkIndicador()">Excluir</button>
         </div>
         </div>

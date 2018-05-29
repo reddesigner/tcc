@@ -1,103 +1,109 @@
 <div class="container">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/projeto">Projetos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Novo Projeto</li>
     </ol>
   </nav>
-  <h1>Novo Projeto</h1>
-  <small>Líder do Escritório de Projetos</small>
+  <h2>Novo Projeto</h2>
+  <!--<small>Líder do Escritório de Projetos</small>-->
   <hr>
-  <h2>Info</h2>
-  <div class="row">
-    <div class="col-6">
-      <div class="form-group">
-        <label>Nome</label>
-        <input type="text" class="form-control">
-      </div>
+    <div class="row">
+        <div class="col-6">
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" class="form-control" [(ngModel)]="newProject.name">
+        </div>
+        </div>
     </div>
-  </div>
-      <div class="row">
-          <div class="col-4">
-              <div class="form-group">
-                  <label>Data de Início</label>
-                  <input class="form-control datepicker">
-              </div>
-          </div>
-          <div class="col-4">
-              <div class="form-group">
-                  <label>Data de Previsão de Términio</label>
-                  <input class="form-control datepicker">
-              </div>
-          </div>
-          <div class="col-4">
-              <div class="form-group">
-                  <label>Data <b>real</b> de Téminio</label>
-                  <input class="form-control datepicker">
-              </div>
-          </div>
-      </div>
-      <div class="row">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data de Início</label>
+                <input class="form-control datepicker" readonly style="background: #fff" #dateStart>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data de Previsão de Términio</label>
+                <input class="form-control datepicker" readonly style="background: #fff" #datePrevision>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data <b>real</b> de Téminio</label>
+                <input class="form-control datepicker" readonly style="background: #fff" #dateEnd>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea class="form-control" [(ngModel)]="newProject.description"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-4">
             <div class="form-group">
                 <label>Orçamento</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="newProject.budget">
             </div>
         </div>
         <div class="col-4">
             <div class="form-group">
                 <label>Riscos</label>
-                <select class="form-control custom-select">
-                    <option>Baixo risco</option>
-                    <option>Médio risco</option>
-                    <option>Alto risco</option>
+                <select class="form-control custom-select" #selectRisk>
+                    <option value="Baixo">Baixo risco</option>
+                    <option value="Médio">Médio risco</option>
+                    <option value="Alto">Alto risco</option>
                 </select>
             </div>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-4">
             <div class="form-group">
                 <label>Status</label>
-                <select class="form-control custom-select">
-                    <option>Em análise</option>
-                    <option>Análise realizada</option>
-                    <option>Análise aprovada</option>
-                    <option>Iniciado</option>
-                    <option>Planejado</option>
-                    <option>Em andamento</option>
-                    <option>Encerrado</option>
-                    <option>Cancelado</option>
+                <select class="form-control custom-select" #selectStatus>
+                    <option value="Em análise">Em análise</option>
+                    <option value="Análise realizada">Análise realizada</option>
+                    <option value="Análise aprovada">Análise aprovada</option>
+                    <option value="Iniciado">Iniciado</option>
+                    <option value="Planejado">Planejado</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Encerrado">Encerrado</option>
+                    <option value="Cancelado">Cancelado</option>
                 </select>
             </div>
         </div>
         <div class="col-6">
+            <!--
+            Este campo somente é útil na edição do status!
             <div class="form-group">
                 <label>Justificativa de mudança de Status</label>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" [(ngModel)]="newProject.justification"></textarea>
             </div>
+            -->
         </div>
     </div>
-    <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea class="form-control"></textarea>
-            </div>
-        </div>
-    </div>
+    <hr>
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <button type="button" class="btn btn-primary">Filtrar</button>
-                <button type="button" class="btn btn-secondary">Limpar</button>
+                <button type="button" class="btn btn-primary" (click)="onSave()">Salvar</button>
+                &nbsp;
+                <button type="button" class="btn btn-secondary" (click)="goBack()">Voltar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- -->
+<!-- 
 <script>
   $(document).ready(function(){
     $('.datepicker').datepicker({
@@ -106,3 +112,4 @@
     });
   })
 </script>
+-->

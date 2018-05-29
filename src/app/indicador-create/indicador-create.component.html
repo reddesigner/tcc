@@ -6,25 +6,32 @@
       <li class="breadcrumb-item active" aria-current="page">Novo indicador</li>
     </ol>
   </nav>
-      <h1>Novo Indicador</h1>
+      <h2>Novo Indicador</h2>
       <small>Líder do Escritório de Projetos</small>
   <hr>
-  <h2>Info</h2>
-  <div class="row">
+  <form #insertForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="row">
           <div class="col-6">
               <div class="form-group">
                   <label>Nome</label>
-                  <input type="text" class="form-control" [(ngModel)]="newIndicador.name">
+                  <input type="text" class="form-control" [(ngModel)]="newIndicador.name" name="name" #name="ngModel" required maxlength="30">
+                  <div [hidden]="name.valid || name.pristine"
+                    style="color: red">
+                    O nome do Indicador é obrigatório.
+                  </div>
               </div>
           </div>
       </div>
       <div class="row">
           <div class="col">
               <div class="form-group">
-                  <button type="button" class="btn btn-primary" (click)="onNewIndicator()">Inserir</button>
+                  <button type="button" class="btn btn-primary" [disabled]="!insertForm.form.valid" (click)="onNewIndicator()">Inserir</button>
                   &nbsp;
-                  <button type="button" class="btn btn-secondary">Limpar</button>
+                  <button type="button" class="btn btn-secondary" (click)="insertForm.reset()">Limpar</button>
+                  &nbsp;
+                  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
               </div>
           </div>
       </div>
+  </form>
 </div>

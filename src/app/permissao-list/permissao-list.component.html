@@ -5,15 +5,16 @@
       <li class="breadcrumb-item active" aria-current="page">Permissões de Telas</li>
     </ol>
   </nav>
-      <h1>Permissões - Telas</h1>
-      <small>Administrador</small>
+      <h2>Permissões de Telas/Funcionalidades</h2>
+      <small>Atividade do Administrador do Sistema</small>
   <hr>
+  <!--
       <h4>Tela</h4>
       <div class="row">
           <div class="col-md-5">
               <div class="form-group">
                   <select class="form-control custom-select" (change)="onSelectViewToDisplay($event)">
-                      <option *ngFor="let view of viewViews" value="{{view.value}}">
+                      <option ** * ng For="let view of viewViews" value="{{view.value}}">
                         {{ view.view }}
                       </option>
                   </select>
@@ -21,147 +22,619 @@
           </div>
       </div>
   <hr>
-    <div [ngSwitch]="showGroup">
-        <div class="row" *ngSwitchCase="'prj'">
-            <div class="col-12 col-md-5 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Perfis com permissão</span>
-                    <span class="badge badge-secondary badge-pill">???</span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Indicador</h6>
+    -->
+
+  <div *ngFor="let oneview of viewPermission">
+
+    <!--<div [ngSwitch]="showGroup">-->
+
+        <div *ngIf="oneview.route == '/projeto'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'prj'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                            <!--<span class="badge badge-secondary badge-pill">???</span>-->
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_1">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_1_1" name="role[]" #chRoleAdmin_1>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_1>
+                                        <input type="checkbox" class="custom-control-input" id="role_1_1" name="role[]" #chRoleAdmin_1>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_1_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_1">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_1_2" name="role[]" #chRoleDirector_1>
+                                    </ng-container>
+                                    <ng-template #otherDirector_1>
+                                        <input type="checkbox" class="custom-control-input" id="role_1_2" name="role[]" #chRoleDirector_1>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_1_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_1">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_1_3" name="role[]" #chRolePrincipal_1>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_1>
+                                        <input type="checkbox" class="custom-control-input" id="role_1_3" name="role[]" #chRolePrincipal_1>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_1_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_1">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_1_4" name="role[]" #chRoleManager_1>
+                                    </ng-container>
+                                    <ng-template #otherManager_1>
+                                        <input type="checkbox" class="custom-control-input" id="role_1_4" name="role[]" #chRoleManager_1>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_1_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_1">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_1_5" name="role[]" #chRoleLeader_1>
+                                    </ng-container>
+                                    <ng-template #otherLeader_1>
+                                        <input type="checkbox" class="custom-control-input" id="role_1_5" name="role[]" #chRoleLeader_1>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_1_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_1(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-secondary">X</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total</span>
-                        <strong>4</strong>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-12 col-md-5 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Perfis disponíveis</span>
-                    <span class="badge badge-secondary badge-pill">???</span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Indicador</h6>
-                        </div>
-                        <button type="button" class="btn btn-secondary">X</button>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-        <div class="row" *ngSwitchCase="'ind'">
-            indicadores
-        </div>
-        <div class="row" *ngSwitchCase="'usr'">
-            usuarios
-        </div>
-        <div *ngSwitchDefault>...</div>
-    </div>
-<!--
-    <div class="row">
-        <div class="col-12 col-md-5 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Perfis com permissão</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-            </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Indicador</h6>
                     </div>
-                    <button type="button" class="btn btn-secondary">X</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Beltrano</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">X</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Cicrano</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">X</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div class="">
-                        <h6 class="my-0">Promo code </h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">X</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total</span>
-                    <strong>4</strong>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-12 col-md-5 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Perfis disponíveis</span>
-                <span class="badge badge-secondary badge-pill">3</span>
-            </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Fulano de Tal</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">Inserir</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Beltrano</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">Inserir</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Cicrano</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">Inserir</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                    <div class="text-success">
-                        <h6 class="my-0">Promo code fdjklfj jf dsfjklsdj fksdjfkl</h6>
-                    </div>
-                    <button type="button" class="btn btn-secondary">Inserir</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total</span>
-                    <strong>4</strong>
-                </li>
-            </ul>
-            <form class="card p-2">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Promo code" type="text">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
+                    <div class="col-md-1"></div>
                 </div>
             </form>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
--->
-    <div class="row">
+        
+            <hr>
 
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <button type="button" class="btn btn-primary">Filtrar</button>
-                &nbsp;
-                <button type="button" class="btn btn-secondary">Limpar</button>
-            </div>
         </div>
-    </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/indicador'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'ind'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                            <!--<span class="badge badge-secondary badge-pill">???</span>-->
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_2">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_2_1" name="role[]" #chRoleAdmin_2>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_2>
+                                        <input type="checkbox" class="custom-control-input" id="role_2_1" name="role[]" #chRoleAdmin_2>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_2_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_2">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_2_2" name="role[]" #chRoleDirector_2>
+                                    </ng-container>
+                                    <ng-template #otherDirector_2>
+                                        <input type="checkbox" class="custom-control-input" id="role_2_2" name="role[]" #chRoleDirector_2>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_2_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_2">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_2_3" name="role[]" #chRolePrincipal_2>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_2>
+                                        <input type="checkbox" class="custom-control-input" id="role_2_3" name="role[]" #chRolePrincipal_2>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_2_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_2">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_2_4" name="role[]" #chRoleManager_2>
+                                    </ng-container>
+                                    <ng-template #otherManager_2>
+                                        <input type="checkbox" class="custom-control-input" id="role_2_4" name="role[]" #chRoleManager_2>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_2_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_2">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_2_5" name="role[]" #chRoleLeader_2>
+                                    </ng-container>
+                                    <ng-template #otherLeader_2>
+                                        <input type="checkbox" class="custom-control-input" id="role_2_5" name="role[]" #chRoleLeader_2>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_2_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_2(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/usuario'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'usr'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                            <!--<span class="badge badge-secondary badge-pill">???</span>-->
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_3">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_3_1" name="role[]" #chRoleAdmin_3>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_3>
+                                        <input type="checkbox" class="custom-control-input" id="role_3_1" name="role[]" #chRoleAdmin_3>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_3_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_3">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_3_2" name="role[]" #chRoleDirector_3>
+                                    </ng-container>
+                                    <ng-template #otherDirector_3>
+                                        <input type="checkbox" class="custom-control-input" id="role_3_2" name="role[]" #chRoleDirector_3>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_3_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_3">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_3_3" name="role[]" #chRolePrincipal_3>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_3>
+                                        <input type="checkbox" class="custom-control-input" id="role_3_3" name="role[]" #chRolePrincipal_3>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_3_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_3">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_3_4" name="role[]" #chRoleManager_3>
+                                    </ng-container>
+                                    <ng-template #otherManager_3>
+                                        <input type="checkbox" class="custom-control-input" id="role_3_4" name="role[]" #chRoleManager_3>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_3_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_3">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_3_5" name="role[]" #chRoleLeader_3>
+                                    </ng-container>
+                                    <ng-template #otherLeader_3>
+                                        <input type="checkbox" class="custom-control-input" id="role_3_5" name="role[]" #chRoleLeader_3>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_3_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_3(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/projeto-equipe'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'prj-eqp'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_4">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_4_1" name="role[]" #chRoleAdmin_4>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_4>
+                                        <input type="checkbox" class="custom-control-input" id="role_4_1" name="role[]" #chRoleAdmin_4>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_4_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_4">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_4_2" name="role[]" #chRoleDirector_4>
+                                    </ng-container>
+                                    <ng-template #otherDirector_4>
+                                        <input type="checkbox" class="custom-control-input" id="role_4_2" name="role[]" #chRoleDirector_4>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_4_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_4">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_4_3" name="role[]" #chRolePrincipal_4>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_4>
+                                        <input type="checkbox" class="custom-control-input" id="role_4_3" name="role[]" #chRolePrincipal_4>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_4_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_4">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_4_4" name="role[]" #chRoleManager_4>
+                                    </ng-container>
+                                    <ng-template #otherManager_4>
+                                        <input type="checkbox" class="custom-control-input" id="role_4_4" name="role[]" #chRoleManager_4>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_4_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_4">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_4_5" name="role[]" #chRoleLeader_4>
+                                    </ng-container>
+                                    <ng-template #otherLeader_4>
+                                        <input type="checkbox" class="custom-control-input" id="role_4_5" name="role[]" #chRoleLeader_4>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_4_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_4(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/projeto-indicador'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'prj-ind'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_5">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_5_1" name="role[]" #chRoleAdmin_5>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_5>
+                                        <input type="checkbox" class="custom-control-input" id="role_5_1" name="role[]" #chRoleAdmin_5>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_5_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_5">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_5_2" name="role[]" #chRoleDirector_5>
+                                    </ng-container>
+                                    <ng-template #otherDirector_5>
+                                        <input type="checkbox" class="custom-control-input" id="role_5_2" name="role[]" #chRoleDirector_5>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_5_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_5">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_5_3" name="role[]" #chRolePrincipal_5>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_5>
+                                        <input type="checkbox" class="custom-control-input" id="role_5_3" name="role[]" #chRolePrincipal_5>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_5_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_5">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_5_4" name="role[]" #chRoleManager_5>
+                                    </ng-container>
+                                    <ng-template #otherManager_5>
+                                        <input type="checkbox" class="custom-control-input" id="role_5_4" name="role[]" #chRoleManager_5>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_5_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_5">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_5_5" name="role[]" #chRoleLeader_5>
+                                    </ng-container>
+                                    <ng-template #otherLeader_5>
+                                        <input type="checkbox" class="custom-control-input" id="role_5_5" name="role[]" #chRoleLeader_5>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_5_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_5(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/projeto-indicador-fase'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'prj-ind-fas'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_6">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_6_1" name="role[]" #chRoleAdmin_6>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_6>
+                                        <input type="checkbox" class="custom-control-input" id="role_6_1" name="role[]" #chRoleAdmin_6>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_6_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_6">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_6_2" name="role[]" #chRoleDirector_6>
+                                    </ng-container>
+                                    <ng-template #otherDirector_6>
+                                        <input type="checkbox" class="custom-control-input" id="role_6_2" name="role[]" #chRoleDirector_6>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_6_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_6">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_6_3" name="role[]" #chRolePrincipal_6>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_6>
+                                        <input type="checkbox" class="custom-control-input" id="role_6_3" name="role[]" #chRolePrincipal_6>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_6_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_6">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_6_4" name="role[]" #chRoleManager_6>
+                                    </ng-container>
+                                    <ng-template #otherManager_6>
+                                        <input type="checkbox" class="custom-control-input" id="role_6_4" name="role[]" #chRoleManager_6>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_6_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_6">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_6_5" name="role[]" #chRoleLeader_6>
+                                    </ng-container>
+                                    <ng-template #otherLeader_6>
+                                        <input type="checkbox" class="custom-control-input" id="role_6_5" name="role[]" #chRoleLeader_6>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_6_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_6(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+        <!-- * * * -->
+
+        <div *ngIf="oneview.route == '/projeto-status'">
+
+            <form>
+                <div class="row"> <!-- *ngSwitchCase="'prj-ind-fas'" -->
+                    <div class="col-12 col-md-5 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">{{ oneview.view }}</span>
+                        </h4>
+                        <h5>
+                            Perfis de usuário:
+                        </h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Administrador')!==-1; else otherAdmin_7">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_7_1" name="role[]" #chRoleAdmin_7>
+                                    </ng-container>
+                                    <ng-template #otherAdmin_7>
+                                        <input type="checkbox" class="custom-control-input" id="role_7_1" name="role[]" #chRoleAdmin_7>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_7_1">Administrador</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_7">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_7_2" name="role[]" #chRoleDirector_7>
+                                    </ng-container>
+                                    <ng-template #otherDirector_7>
+                                        <input type="checkbox" class="custom-control-input" id="role_7_2" name="role[]" #chRoleDirector_7>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_7_2">Diretor</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_7">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_7_3" name="role[]" #chRolePrincipal_7>
+                                    </ng-container>
+                                    <ng-template #otherPrincipal_7>
+                                        <input type="checkbox" class="custom-control-input" id="role_7_3" name="role[]" #chRolePrincipal_7>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_7_3">Líder do Escritório de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('Gerente de Projeto')!==-1; else otherManager_7">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_7_4" name="role[]" #chRoleManager_7>
+                                    </ng-container>
+                                    <ng-template #otherManager_7>
+                                        <input type="checkbox" class="custom-control-input" id="role_7_4" name="role[]" #chRoleManager_7>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_7_4">Gerente de Projetos</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_7">
+                                        <input type="checkbox" checked class="custom-control-input" id="role_7_5" name="role[]" #chRoleLeader_7>
+                                    </ng-container>
+                                    <ng-template #otherLeader_7>
+                                        <input type="checkbox" class="custom-control-input" id="role_7_5" name="role[]" #chRoleLeader_7>
+                                    </ng-template>
+                                    <label class="custom-control-label" for="role_7_5">Líder de Projeto</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="onSaveGroup_7(oneview._id)">Salvar {{ oneview.view }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </form>
+
+            <hr>
+
+        </div>
+
+    <!--</div>-->
+
+  </div>
+
+  <br style="clear: both">
+
 </div>

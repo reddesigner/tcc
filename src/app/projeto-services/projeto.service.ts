@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { MessageService } from '../_controllers/message/service/message.service';
+
 import { Projeto } from '../_models/projeto.model';
 
 @Injectable({
@@ -12,10 +14,13 @@ import { Projeto } from '../_models/projeto.model';
 })
 export class ProjetoService {
 
-  private projetoURL = 'api/projetos';
+  private projetoURL = 'api/projeto';
+  private projetoEquipeURL = 'api/projeto-equipe';
+  private projetoIndicadorFaseURL = 'api/projeto-indicador-fase';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private message: MessageService
   ) { }
 
   getProjetos(): Observable<Projeto[]> {
@@ -25,7 +30,7 @@ export class ProjetoService {
     );
   }
 
-  getProjetoById(id: number): Observable<Projeto> {
+  getProjetoById(id: string): Observable<Projeto> {
     return this.http.get<Projeto>(this.projetoURL + '/' + id).pipe(
       tap(),
       catchError(this.handleError<Projeto>('getProjeto'))
@@ -34,14 +39,46 @@ export class ProjetoService {
 
   postProjeto(projeto: Projeto): Observable<Projeto> {
     return this.http.post<Projeto>(this.projetoURL, projeto).pipe(
-      tap(),
-      catchError(this.handleError<Projeto>('getProjeto'))
+      tap(
+        () => {
+          this.message.success('Projeto salvo com sucesso.', true);
+        }
+      ),
+      catchError(this.handleError<Projeto>('postProjeto'))
     );
   }
 
-  deleteProjeto(id: Number): Observable<Projeto> {
-    return this.http.post<Projeto>(this.projetoURL, id).pipe(
-      tap(),
+  putProjeto(projeto: Projeto, subtype: string = 'projeto'): Observable<Projeto> {
+    let putProjetoUrl: string;
+    switch(subtype){
+      case 'projeto':
+        putProjetoUrl = this.projetoURL;
+      break;
+      case 'equipe':
+        putProjetoUrl = this.projetoEquipeURL;
+      break;
+      case 'indicador-fase':
+        putProjetoUrl = this.projetoIndicadorFaseURL;
+      break;
+    }
+    return this.http.put<Projeto>(putProjetoUrl + '/' + projeto._id, projeto).pipe(
+      tap(
+        () => {
+          this.message.success('Projeto editado e salvo com sucesso.', true);
+        }
+      ),
+      catchError(this.handleError<Projeto>('putProjeto'))
+    );
+  }
+
+  deleteProjeto(id: string): Observable<Projeto> {
+    return this.http.delete<Projeto>(this.projetoURL + '/' + id).pipe(
+      tap(
+        (obj) => {
+          // delete volta apenas mensagem, não um Projeto
+          this.message.success(obj['message'], true);
+        }
+      ),
       catchError(this.handleError<Projeto>('getProjeto'))
     );
   }
@@ -51,15 +88,11 @@ export class ProjetoService {
     console.log(message);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'Operação ', result?: T) {
       return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
+      this.log(`${operation} falhou: ${error.message}`);
+      this.message.error(`${operation} falhou: ${error.message}`, true);
       return of(result as T);
     };
   }

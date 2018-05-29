@@ -23,7 +23,7 @@ export class ProjetoDetailComponent implements OnInit {
 
   getProjetoUrl() {
     // pegar o usuário no serviço atraves do ID enviado como parametro
-    const id = +this.route.snapshot.paramMap.get('id'); // o + converte a string para number
+    const id = this.route.snapshot.paramMap.get('id');
     // serviço get projeto
     this.projeto.getProjetoById(id).subscribe(
       //

@@ -14,7 +14,7 @@ export class IndicadorListComponent implements OnInit {
 
   public indicadorList: Indicador[];
 
-  private deleteIndicadorWait: number;
+  private deleteIndicadorWait: string;
 
   constructor(
     private indicadorService: IndicadorService,
@@ -39,13 +39,13 @@ export class IndicadorListComponent implements OnInit {
   }
 
   // vai para tela de edição/detalhe
-  onSelectEditIndicador(idIndicador: number) {
+  onSelectEditIndicador(idIndicador: string) {
     console.log('indicador-list.componente onSelectEditIndicador()');
-    this.route.navigate(['/indicador/detail/' + idIndicador]);
+    this.route.navigate(['/indicador/edit/' + idIndicador]);
   }
 
   // grupo de funções para deletar (confirmação no popup)
-  public onSelectDeleteIndicador(idIndicador: number): void {
+  public onSelectDeleteIndicador(idIndicador: string): void {
     console.log('indicador-list.componente onSelectDeleteIndicador()');
     this.deleteIndicadorWait = idIndicador;
   }
@@ -55,11 +55,11 @@ export class IndicadorListComponent implements OnInit {
       // chama serviço para deletar indicador
       this.indicadorService.deleteIndicador(this.deleteIndicadorWait).subscribe(
         () => {
-          console.log('voltou do DELETE indicador');
+          // console.log('voltou do DELETE indicador');
           this.indicadorList = this.indicadorList.filter(el => {
-            console.log('el.id ', el.id);
-            console.log('deleteIndicadorWait: ', this.deleteIndicadorWait);
-            return el.id !== this.deleteIndicadorWait;
+            // console.log('el.id ', el._id);
+            // console.log('deleteIndicadorWait: ', this.deleteIndicadorWait);
+            return el._id !== this.deleteIndicadorWait;
           });
           this.deleteIndicadorWait = null;
         }

@@ -6,7 +6,9 @@
       <li class="breadcrumb-item active" aria-current="page">Data</li>
     </ol>
   </nav>
-  <h1>Lista de Usuários</h1>
+  <!--
+  <h2>Lista de Usuários
+  </h2>
   <hr>
   <h2>Filtros</h2>
   <div class="row">
@@ -35,26 +37,33 @@
     </div>
   </div>
   <hr>
+-->
   <h2>
     Lista
-    <div class="float-right"><button type="button" class="btn btn-primary">+</button></div>
+    <div class="float-right"><button type="button" class="btn btn-primary" (click)="onNewUsuario()">+ novo usuário</button></div>
   </h2>
+
   <div>
     <table class="table">
       <thead>
         <tr>
-          <th>Usuários</th>
-          <th></th>
+          <th class="w1p"></th>
+          <th>Usuário</th>
+          <th class="w20p">Perfil</th>
+          <th class="w20p">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usuario of usuariosList">
-          <td>{{usuario.name}}</td>
+        <tr *ngFor="let usuario of usuariosList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.name }}</td>
+          <td>{{ usuario.role }}</td>
           <td>
-            <button type="button" class="btn btn-default" (click)="onSelectUsuario(usuario._id)">
+            <button type="button" class="btn btn-default btn-sm" (click)="onSelectUsuario(usuario._id)">
               editar
             </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            &nbsp;
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onDeleteUsuario(usuario._id)">
               excluir
             </button>
           </td>
@@ -75,11 +84,11 @@
             </button>
         </div>
         <div class="modal-body">
-            Deseja realmente excluir este item?
+            Deseja realmente excluir este usuário?
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Excluir</button>
+            <button type="button" class="btn btn-danger" (click)="onConfirmDeleteUsuario()">Excluir</button>
         </div>
         </div>
     </div>

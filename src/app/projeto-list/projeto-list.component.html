@@ -1,11 +1,11 @@
 <div class="container">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Projetos</li>
     </ol>
   </nav>
+  <!--
   <h1>Lista de Projetos</h1>
   <hr>
   <h2>Filtros</h2>
@@ -34,27 +34,49 @@
 
     </div>
   </div>
+-->
   <hr>
   <h2>
-    Lista
-    <div class="float-right"><button type="button" class="btn btn-primary">Primary</button></div>
+    Lista de Projetos
+    <div class="float-right"><button type="button" class="btn btn-primary" (click)="onNewProject()">+ novo projeto</button></div>
   </h2>
   <div>
     <table class="table">
       <thead>
         <tr>
           <th>Projeto</th>
+          <th>Equipe</th>
+          <th>Indicadores</th>
+          <th>Situação</th>
           <th class="w20p">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let projeto of projetoList">
-          <td>{{projeto._id}} - {{projeto.name}}</td>
+          <td>{{projeto.name}}</td>
+          <td>
+             {{ projeto.team.length > 0 ? ( projeto.team.length > 1 ? projeto.team.length+' membros' : '1 membro' ) : 'Sem equipe' }}
+             &nbsp;
+             <button type="button" class="btn btn-default btn-sm" (click)="onSelectTeam(projeto._id)">
+              gerir equipe
+            </button>           
+          </td>
+          <td>
+            <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicators(projeto._id)">
+              gerir indicadores
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-default btn-sm" (click)="onSelectStatus(projeto._id)">
+              gerir status
+            </button>
+          </td>
           <td>
             <button type="button" class="btn btn-default" (click)="onSelectEditProjeto(projeto._id)">
               editar
             </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
+            &nbsp;
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
               excluir
             </button>
           </td>
@@ -79,6 +101,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onDeselectDeleteOkProjeto()">Cancelar</button>
+        &nbsp;
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">Excluir</button>
     </div>
     </div>
