@@ -1,3 +1,103 @@
-<p>
-  projeto-status works!
-</p>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/projeto">Projetos</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Editar Status do Projeto</li>
+    </ol>
+  </nav>
+  <h2>Editar Status</h2>
+  <!--<small>Líder do Escritório de Projetos</small>-->
+  <hr>
+    <div class="row">
+        <div class="col-6">
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" class="form-control" readonly [(ngModel)]="currentProject.name">
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data de Início</label>
+                <input class="form-control datepicker" readonly value="{{initDateStart}}" #dateStart>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data de Previsão de Términio</label>
+                <input class="form-control datepicker" readonly value="{{initDatePrevision}}" #datePrevision>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Data <b>real</b> de Téminio</label>
+                <input class="form-control datepicker" readonly value="{{initDateEnd}}" #dateEnd>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!--
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea class="form-control" [(ngModel)]="currentProject.description"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Orçamento</label>
+                <input type="text" class="form-control" [(ngModel)]="currentProject.budget">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Riscos</label>
+                <select class="form-control custom-select" #selectRisk>
+                    <option value="Baixo">Baixo risco</option>
+                    <option value="Médio">Médio risco</option>
+                    <option value="Alto">Alto risco</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+    -->
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label>Status</label>
+                <select class="form-control custom-select" #selectStatus (change)="changeStatus($event)">
+                  <option value="Em análise" [selected]="currentProject.status == 'Em análise'">Em análise</option>
+                  <option value="Análise realizada" [selected]="currentProject.status == 'Análise realizada'">Análise realizada</option>
+                  <option value="Análise aprovada" [selected]="currentProject.status == 'Análise aprovada'">Análise aprovada</option>
+                  <option value="Iniciado" [selected]="currentProject.status == 'Iniciado'">Iniciado</option>
+                  <option value="Planejado" [selected]="currentProject.status == 'Planejado'">Planejado</option>
+                  <option value="Em andamento" [selected]="currentProject.status == 'Em andamento'">Em andamento</option>
+                  <option value="Encerrado" [selected]="currentProject.status == 'Encerrado'">Encerrado</option>
+                  <option value="Cancelado" [selected]="currentProject.status == 'Cancelado'">Cancelado</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Justificativa de mudança de Status</label>
+                <textarea class="form-control" [(ngModel)]="currentProject.justification" [disabled]="disbleJustification"></textarea>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="onSave()">Salvar</button>
+                &nbsp;
+                <button type="button" class="btn btn-secondary" (click)="goBack()">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -38,6 +38,7 @@ export class ProjetoEditComponent implements OnInit {
   constructor(
     private projetoService: ProjetoService,
     private route: ActivatedRoute,
+    private message: MessageService,
     private location: Location
   ) { }
 
@@ -55,7 +56,7 @@ export class ProjetoEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.projetoService.getProjetoById(id).subscribe(
       prj => {
-        this.currentProject = prj
+        this.currentProject = prj;
         console.log(this.currentProject);
         // formatar e imprimir datas
         if (this.currentProject.dateStart) {
@@ -110,6 +111,7 @@ export class ProjetoEditComponent implements OnInit {
     console.log(this.currentProject);
     if (!this.disbleJustification && this.currentProject.justification == undefined) {
       console.log('É necessário escrever uma justificativa');
+      this.message.warning('Essa mudança de status exige que uma justificativa seja informada');
       return false;
       // TODO mandar tbm o usuario e a data da alteração de status!!!!!!!!!! tenho que pegar o usuário logado!!!!!!!!!!!
       // o status não deve ser alterado aqui!!!!!!!!!!!! tem que ter uma tela só pra ele!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -129,7 +131,7 @@ export class ProjetoEditComponent implements OnInit {
 
   changeStatus($event) {
     //console.log($event.target.value);
-    if ($event.target.value == 'Cancelado' || $event.target.value == 'Em análise') {
+    if ($event.target.value == 'Cancelado' || $event.target.value == 'Análise aprovada') {
       this.disbleJustification = false;
     } else {
       this.disbleJustification = true;

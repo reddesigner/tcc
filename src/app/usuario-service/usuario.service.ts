@@ -33,14 +33,20 @@ export class UsuarioService {
     );
   }
 
-  newUsuario(usu: Usuario) {
-    this.http.post<Usuario>(this.usuarioUrl, usu).pipe(
+  newUsuario(usu: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.usuarioUrl, usu).pipe(
+      tap(
+        () => this.message.success('Usuario criado.')
+      ),
       catchError(this.errorHandler<Usuario>('newUsuario'))
     );
   }
 
-  editUsuario(id: string, usu: Usuario) {
-    this.http.put<Usuario>(this.usuarioUrl + '/' + id, usu).pipe(
+  editUsuario(id: string, usu: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(this.usuarioUrl + '/' + id, usu).pipe(
+      tap(
+        () => this.message.success('Usuario salvo.')
+      ),
       catchError(this.errorHandler<Usuario>('editUsuario'))
     );
   }

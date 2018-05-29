@@ -1,33 +1,60 @@
 <div class="container">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item"><a href="#">Library</a></li>
-				<li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
-        <li class="breadcrumb-item active" aria-current="page">Data Ah!</li>
+				<li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+				<li class="breadcrumb-item"><a routerLink="/usuario">Usuários</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Usuário</li>
 			</ol>
 		</nav>
     <h2>Novo Usuário</h2>
-		<hr>
-		<h2>Info</h2>
-		<div class="row">
+	<hr>
+    <form #insertForm="ngForm" (ngSubmit)="onSubmit()">
+	<div class="row">
         <div class="col-6">
             <div class="form-group">
                 <label>Nome</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="newUser.name" name="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine"
+                    style="color: red">
+                    O nome do Usuário é obrigatório.
+                </div>
             </div>
         </div>
     </div>
-		<div class="row">
+	<div class="row">
         <div class="col-6">
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="newUser.email" name="email" #email="ngModel" required>
+                <div [hidden]="email.valid || email.pristine"
+                    style="color: red">
+                    O Email é obrigatório.
+                </div>
             </div>
         </div>
     </div>
-		<div class="row">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Confirme o email</label>
+                <input type="text" class="form-control" [(ngModel)]="confirmMail" name="emailconfirm" #emailconfirm="ngModel" required>
+                <div [hidden]="emailconfirm.valid || emailconfirm.pristine"
+                    style="color: red">
+                    O email deve ser o mesmo nos dois campos.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col small">
+            O endereço de email será usado como identidade de usuário para efetuar o login.
+            <br>
+            Um email será enviado para o endereço com uma senha provisória que deverá ser trocada ao efetuar-se o primeiro acesso ao sistema.
+        </div>
+    </div>
+    <!--
+	<div class="row">
         <div class="col-4">
             <div class="form-group">
                 <label>Login</label>
@@ -47,28 +74,37 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    -->
+    <div class="row mt-3">
         <div class="col-4">
             <div class="form-group">
                 <label>Perfíl</label>
-                <select class="form-control custom-select">
-                    <option>Administrador</option>
-                    <option>Membro Alta Direção</option>
-                    <option>Líder do Escritório de Projetos</option>
-                    <option>Gerente de Projeto</option>
-                    <option>Líder de Projeto</option>
-                    <option>Peões</option>
+                <select class="form-control custom-select" [(ngModel)]="newUser.role"  name="perfil" #perfil="ngModel" required>
+                    <optgroup label="escolha um perfil...">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Diretor">Membro Alta Direção</option>
+                    <option value="Líder do Escritório de Projetos">Líder do Escritório de Projetos</option>
+                    <option value="Gerente de Projeto">Gerente de Projeto</option>
+                    <option value="Líder de Time">Líder de Projeto</option>
+                    <option selected>Membro de time</option>
+                    </optgroup>
                 </select>
+                <div [hidden]="perfil.valid || perfil.pristine || false"
+                    style="color: red">
+                    É necessário informar um perfil de usuário.
+                </div>
             </div>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <button type="button" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!insertForm.form.valid">Salvar</button>
                 &nbsp;
-                <button type="button" class="btn btn-secondary">Limpar</button>
+                <button type="button" class="btn btn-secondary" (click)="goBack()">Voltar</button>
             </div>
         </div>
     </div>
+    </form>
 </div>

@@ -2,7 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-      <li class="breadcrumb-item"><a routerLink="/projeto">Projeto</a></li>
+      <li class="breadcrumb-item"><a routerLink="/projeto">Projetos</a></li>
       <li class="breadcrumb-item active" aria-current="page">Editar Projeto</li>
     </ol>
   </nav>
@@ -57,9 +57,9 @@
             <div class="form-group">
                 <label>Riscos</label>
                 <select class="form-control custom-select" #selectRisk>
-                    <option value="Baixo">Baixo risco</option>
-                    <option value="Médio">Médio risco</option>
-                    <option value="Alto">Alto risco</option>
+                    <option value="Baixo" [selected]="currentProject.risk == 'Baixo'">Baixo risco</option>
+                    <option value="Médio" [selected]="currentProject.risk == 'Médio'">Médio risco</option>
+                    <option value="Alto" [selected]="currentProject.risk == 'Alto'">Alto risco</option>
                 </select>
             </div>
         </div>
@@ -70,14 +70,14 @@
             <div class="form-group">
                 <label>Status</label>
                 <select class="form-control custom-select" #selectStatus (change)="changeStatus($event)">
-                    <option value="Em análise">Em análise</option>
-                    <option value="Análise realizada">Análise realizada</option>
-                    <option value="Análise aprovada">Análise aprovada</option>
-                    <option value="Iniciado">Iniciado</option>
-                    <option value="Planejado">Planejado</option>
-                    <option value="Em andamento">Em andamento</option>
-                    <option value="Encerrado">Encerrado</option>
-                    <option value="Cancelado">Cancelado</option>
+                    <option value="Em análise" [selected]="currentProject.status == 'Em análise'">Em análise</option>
+                    <option value="Análise realizada" [selected]="currentProject.status == 'Análise realizada'">Análise realizada</option>
+                    <option value="Análise aprovada" [selected]="currentProject.status == 'Análise aprovada'">Análise aprovada</option>
+                    <option value="Iniciado" [selected]="currentProject.status == 'Iniciado'">Iniciado</option>
+                    <option value="Planejado" [selected]="currentProject.status == 'Planejado'">Planejado</option>
+                    <option value="Em andamento" [selected]="currentProject.status == 'Em andamento'">Em andamento</option>
+                    <option value="Encerrado" [selected]="currentProject.status == 'Encerrado'">Encerrado</option>
+                    <option value="Cancelado" [selected]="currentProject.status == 'Cancelado'">Cancelado</option>
                 </select>
             </div>
         </div>

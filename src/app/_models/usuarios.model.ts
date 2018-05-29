@@ -3,4 +3,5 @@ export class Usuario {
   name: string;
   email: string;
   role: string;
+  firsttime: boolean;
 }
