@@ -65,7 +65,7 @@ export class UsuarioEditComponent implements OnInit {
   }
 
   goBack() {
-
+    this.location.back();
   }
 
 }
