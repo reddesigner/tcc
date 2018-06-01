@@ -39,6 +39,7 @@ import { PermissaoListComponent } from './permissao-list/permissao-list.componen
 import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
 
 import { MessageComponent } from './_controllers/message/component/message.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { MessageComponent } from './_controllers/message/component/message.compo
     IndicadorEditComponent,
     PermissaoListComponent,
     RelatorioListComponent,
-    MessageComponent
+    MessageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

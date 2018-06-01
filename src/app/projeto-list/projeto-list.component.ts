@@ -30,8 +30,7 @@ export class ProjetoListComponent implements OnInit {
     // this.projeto_list = this.projetoService.getProjetos();
     const that = this;
     this.projetoService.getProjetos().subscribe(function(projetos) {
-      console.log('projeto-list.componente getProjetos()');
-      // console.dir(projetos);
+      console.log('projeto-list.componente getProjetos()', projetos);
       that.projetoList = projetos;
     });
   }

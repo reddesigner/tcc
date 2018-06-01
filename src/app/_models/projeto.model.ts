@@ -14,5 +14,6 @@ export class Projeto {
   actualPhase: Number;
   phases: any;
   indicators: any[];
-  team: any[]
+  team: any[];
+  manager: any
 }

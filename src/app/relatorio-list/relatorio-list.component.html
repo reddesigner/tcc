@@ -8,6 +8,18 @@
   <h2>Relatório de Acompanhamento de Projetos</h2>
   <hr>
 
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <label>Listar Projetos</label>
+        <select class="form-control custom-select" #selectProject (change)="onChangeFilter($event)">
+          <option value="">Todos</option>
+          <option *ngFor="let item of reportProjectLis" value="{{item._id}}">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+<!--
   <h4>Filtros</h4>
   <div class="row">
     <div class="col-4">
@@ -50,18 +62,118 @@
   <h4>
     Lista
   </h4>
+-->
   <div>
     <table class="table">
+      <!--
       <thead>
         <tr>
           <th>cabeça</th>
           <th>cabeça</th>
         </tr>
       </thead>
-      <tbody>
+      -->
+      <tbody *ngFor="let item of reportProjectLis_Filtered" style="margin-bottom:40px">
         <tr>
-          <td>corpo</td>
-          <td>corpo</td>
+          <td colspan="4">
+            <div class="small">Projeto:</div>
+            <b>{{item.name}}</b>
+          </td>
+        <tr>
+          <td>
+            <div class="small">Data de início:</div>
+            <b>{{ ( item.dateStartReport ? item.dateStartReport : '-' ) }}</b>
+          </td>
+          <td>
+            <div class="small">Data de previsão de términio:</div>
+            <b>{{ ( item.datePrevisionReport ? item.datePrevisionReport : '-' ) }}</b>
+          </td>
+          <td>
+            <div class="small">Data real de términio:</div>
+            <b>{{ ( item.dateEndReport ? item.dateEndReport : '-' ) }}</b>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="small">Descrição:</div>
+              {{ item.description }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="small">Membro(s) do time:</div>
+            <div *ngFor="let team of item.team">
+              {{ team.name }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <span class="small">
+              Indicadores
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td style="border-top: none">
+            <div class="small">Fase 1:</div>
+            <div *ngFor="let ind of item.phases.phase1">
+              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+            </div>
+          </td>
+          <td style="border-top: none">
+            <div class="small">Fase 2:</div>
+            <div *ngFor="let ind of item.phases.phase2">
+              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+            </div>
+          </td>
+          <td style="border-top: none">
+            <div class="small">Fase 3:</div>
+            <div *ngFor="let ind of item.phases.phase3">
+              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+            </div>
+          </td>
+          <td style="border-top: none">
+            <div class="small">Fase 4:</div>
+            <div *ngFor="let ind of item.phases.phase4">
+              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="small">Orçamento:</div>
+              {{ item.budget }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="small">Risco:</div>
+              {{ item.risk }}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="small">Status:</div>
+              {{ item.status }}
+          </td>
+          <td colspan="2" *ngIf="item.userChangeStatus">
+            <div class="small">Última alteração de status:</div>
+              {{ item.dateChangeStatusReport }}
+              <br>
+              {{ item.userChangeStatus.name }}
+              <br>
+              <span class="small">
+                  {{ item.userChangeStatus.role }}
+              </span>
+          </td>
+        </tr>
+        <tr *ngIf="manager">
+          <td colspan="4">
+            <div class="small">Gerente:</div>
+              {{ manager.name }} <span class="small"> {{ manager.role }} </span>
+          </td>
         </tr>
       </tbody>
     </table>

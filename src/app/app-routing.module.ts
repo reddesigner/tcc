@@ -28,7 +28,7 @@ import { UsuarioDetailComponent } from './usuario-detail/usuario-detail.componen
 import { PermissaoListComponent } from './permissao-list/permissao-list.component';
 
 import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
-/*import {} from '';*/
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'projeto', component: ProjetoListComponent},
@@ -56,7 +56,9 @@ const routes: Routes = [
   { path: 'relatorio', component: RelatorioListComponent },
 
   { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

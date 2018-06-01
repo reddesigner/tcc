@@ -24,7 +24,7 @@ export class ProjetoService {
   ) { }
 
   getProjetos(): Observable<Projeto[]> {
-    return this.http.get<Projeto[]>(this.projetoURL).pipe(
+    return this.http.get<Projeto[]>( this.projetoURL).pipe(
       tap( () => {} ),
       catchError(this.handleError('getProjetos', []))
     );

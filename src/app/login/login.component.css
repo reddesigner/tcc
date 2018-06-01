@@ -1,0 +1,62 @@
+
+.playtest {
+    font-size: 240%;
+    line-height: .75;
+    text-align: center;
+}
+.play {
+    border: 2px solid #bbc;
+    border-radius: 50%;
+    width: 60%;
+    padding-top: 60%;
+    margin: 0 20%;
+    position: relative;
+}
+.text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.text span:first-child {
+    padding-bottom: 40px;
+}
+.text span:last-child {
+    padding-top: 40px;
+}
+.align-center {
+    text-align: center;
+}
+
+@media screen and (min-width: 901px) {
+  .text {
+    font-size: 120px;
+    line-height: 240px;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .text {
+      font-size: 60px;
+      line-height: 120px;
+      text-align: center;
+    }
+  }
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+    .text {
+      font-size: 60px;
+      line-height: 120px;
+      text-align: center;
+    }
+  }
+
+@media screen and (max-width: 400px) {
+  .text {
+    font-size: 40px;
+    line-height: 80px;
+    text-align: center;
+  }
+}

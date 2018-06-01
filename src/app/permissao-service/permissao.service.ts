@@ -23,7 +23,9 @@ export class PermissaoService {
 
   get(): Observable<Permissao[]> {
     return this.httpService.get<Permissao[]>(this.permissaoApiUrl).pipe(
-      tap(),
+      tap(
+        r => console.log(r)
+      ),
       catchError(this.handleError<Permissao[]>('get'))
     );
   }

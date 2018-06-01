@@ -21,12 +21,15 @@ export class TokenInterceptor implements HttpInterceptor {
     const serverUrl = 'http://localhost:3000/';
 
     request = request.clone({
-      url: serverUrl + request.url,
+
       setHeaders: {
+        observe: 'response',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.auth.getToken()}`,
         'x-access-token': `${this.auth.getToken()}`
-      }
+      },
+      url: serverUrl + request.url,
+      
     });
 
     /*
