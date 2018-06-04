@@ -92,7 +92,8 @@ export class ProjetoService {
       return (error: any): Observable<T> => {
       console.error(error); // log to console instead
       this.log(`${operation} falhou: ${error.message}`);
-      this.message.error(`${operation} falhou: ${error.message}`, true);
+      // this.message.error(`${operation} falhou: ${error.message}`, true);
+      this.message.error(error.error.message, true);
       return of(result as T);
     };
   }

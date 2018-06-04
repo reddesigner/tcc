@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuardService } from './_controllers/auth/service/auth-guard.service'; // guarda de rotas
+
+import { LoginComponent } from './autenticar/login.component';
 import { HomeComponent } from './home/home.component';
 
 import { ProjetoListComponent } from './projeto-list/projeto-list.component';
@@ -28,37 +30,36 @@ import { UsuarioDetailComponent } from './usuario-detail/usuario-detail.componen
 import { PermissaoListComponent } from './permissao-list/permissao-list.component';
 
 import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
-import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'projeto', component: ProjetoListComponent},
-  { path: 'projeto/create', component: ProjetoCreateComponent},
-  { path: 'projeto/detail/:id', component: ProjetoDetailComponent},
-  { path: 'projeto/edit/:id', component: ProjetoEditComponent},
+  { path: 'projeto', component: ProjetoListComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/create', component: ProjetoCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/detail/:id', component: ProjetoDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/edit/:id', component: ProjetoEditComponent, canActivate: [AuthGuardService] },
 
-  { path: 'projeto/indicador/:id', component: ProjetoIndicadorComponent},
-  { path: 'projeto/indicador-fase/:id', component: ProjetoIndicadorFaseComponent},
-  { path: 'projeto/equipe/:id', component: ProjetoEquipeComponent},
-  { path: 'projeto/status/:id', component: ProjetoStatusComponent},
+  { path: 'projeto/indicador/:id', component: ProjetoIndicadorComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/indicador-fase/:id', component: ProjetoIndicadorFaseComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/equipe/:id', component: ProjetoEquipeComponent, canActivate: [AuthGuardService] },
+  { path: 'projeto/status/:id', component: ProjetoStatusComponent, canActivate: [AuthGuardService] },
   
-  { path: 'usuario', component: UsuarioListComponent },
-  { path: 'usuario/create', component: UsuarioCreateComponent },
-  { path: 'usuario/detail/:id', component: UsuarioDetailComponent },
-  { path: 'usuario/edit/:id', component: UsuarioEditComponent },
+  { path: 'usuario', component: UsuarioListComponent, canActivate: [AuthGuardService] },
+  { path: 'usuario/create', component: UsuarioCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'usuario/detail/:id', component: UsuarioDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'usuario/edit/:id', component: UsuarioEditComponent, canActivate: [AuthGuardService] },
 
-  { path: 'indicador', component: IndicadorListComponent },
-  { path: 'indicador/create', component: IndicadorCreateComponent },
-  { path: 'indicador/detail/:id', component: IndicadorDetailComponent },
-  { path: 'indicador/edit/:id', component: IndicadorEditComponent },
+  { path: 'indicador', component: IndicadorListComponent, canActivate: [AuthGuardService] },
+  { path: 'indicador/create', component: IndicadorCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'indicador/detail/:id', component: IndicadorDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'indicador/edit/:id', component: IndicadorEditComponent, canActivate: [AuthGuardService] },
   
-  { path: 'permissao', component: PermissaoListComponent },
+  { path: 'permissao', component: PermissaoListComponent, canActivate: [AuthGuardService] },
 
-  { path: 'relatorio', component: RelatorioListComponent },
+  { path: 'relatorio', component: RelatorioListComponent, canActivate: [AuthGuardService] },
 
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginComponent }, // única página que não precisa estar logado nem permissão
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: '**', redirectTo: 'home', pathMatch: 'full' } // não deveria ser uma página padrão tipo 404?
 ];
 
 @NgModule({

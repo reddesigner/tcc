@@ -62,7 +62,15 @@ export class UsuarioService {
 
   errorHandler<T>(operation = 'Operação', result?: T) {
     return (error: any): Observable<T> => {
-      this.message.error(`Houve uma falha na operação ${operation}`, true);
+      console.error(error);
+      console.log(`Houve uma falha na operação ${operation}`);
+      if(error.error && error.error.message)
+        this.message.error(error.error.message, true);
+      else
+        this.message.error('Erro não identificado. [usu.ser.'+operation+']', true);
+      /*if (error.error.message.indexOf('jwt expired') > 0) {
+        // TODO logout
+      }*/
       return of(result as T);
     };
   }

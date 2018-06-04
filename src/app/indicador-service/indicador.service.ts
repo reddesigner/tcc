@@ -31,11 +31,11 @@ export class IndicadorService {
 
   // retorna um
   getIndicadorById(id: string): Observable<Indicador> {
-    console.log('id que vai...', id);
+    console.log('indicador.service --- id que vai para get by id...', id);
     return this.http.get<Indicador>(this.indicadoresApiUrl + '/' + id).pipe(
       tap(
         () => {
-          console.log('TAP: editando indicador...');
+          console.log('indicador.service --- TAP: editando indicador...');
       }),
       catchError(this.handleError<Indicador>('getIndicadorById'))
     );
@@ -45,7 +45,7 @@ export class IndicadorService {
   postIndicador(indicador: Indicador): Observable<Indicador> {
     return this.http.post<Indicador>(this.indicadoresApiUrl, indicador).pipe(
       tap(ind => {
-        console.log('TAP: gravando novo indicador no banco...', ind);
+        console.log('indicador.service --- TAP: gravando novo indicador no banco...', ind);
         // foi um sucesso!
         this.message.success(`O indicador ${ind.name} foi inserido com sucesso`, true);
       }),
@@ -55,7 +55,7 @@ export class IndicadorService {
 
   // editar
   putIndicador(indicador: Indicador): Observable<Indicador> {
-    console.log('o indicador aqui é...', indicador);
+    console.log('indicador.service --- o indicador aqui no put é...', indicador);
     return this.http.put<Indicador>(this.indicadoresApiUrl + '/' +indicador._id, indicador).pipe(
       tap(
         /*() => {
@@ -70,7 +70,7 @@ export class IndicadorService {
   deleteIndicador(id: string) {
     return this.http.delete<Indicador>(this.indicadoresApiUrl + '/' + id).pipe(
       tap(() => {
-        console.log('sucesso na exclusão!');
+        console.log('indicador.service --- sucesso na exclusão!');
         this.message.error(`O indicador foi excluído com sucesso`, true);
       }),
       catchError(this.handleError<Indicador>('deleteIndicador'))
@@ -79,14 +79,16 @@ export class IndicadorService {
 
   private log(message: string): void {
     // message service
-    console.log(message);
+    console.log('indicador.service --- indicador.service.ts - ' + message);
   }
 
   private handleError<T>(operation = 'Operação', result?: T) {
     return (error: any): Observable<T> => {
+      // console.log('indicador.service.ts - ', error);
       // console.error('handleError em indicador.service', error);
       this.log(`${operation} falhou: ${error.message}`);
-      this.message.error(`Houve uma falha na operação ${operation}`, true);
+      // this.message.error(`Houve uma falha na operação ${operation}`, true);
+      this.message.error(error.error.message, true);
       // retorna um resultado vazio para app continuar rodando
       return of(result as T);
     };

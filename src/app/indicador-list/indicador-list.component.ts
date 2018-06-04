@@ -29,7 +29,9 @@ export class IndicadorListComponent implements OnInit {
     // subscrive fica ouvindo o observable (do serviço) e dispara a função quando receber a lista de
     // indicadores... a função para a lista recebida para a variável local de lista de indicadores.
     this.indicadorService.getIndicadores().subscribe(
-      (inds) => { this.indicadorList = inds; }
+      (inds) => {
+        this.indicadorList = inds;
+      }
     );
   }
 

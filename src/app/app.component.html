@@ -16,7 +16,7 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     -->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="auth.permissionList.indexOf('/projeto') >= 0">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Projetos
         </a>
@@ -31,7 +31,7 @@
           <a class="dropdown-item" routerLink="/projeto">Listar todos projetos</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="auth.permissionList.indexOf('/usuario') >= 0">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Usuários
         </a>
@@ -41,7 +41,7 @@
           <a class="dropdown-item" routerLink="/usuario">Listar todos usuários</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="auth.permissionList.indexOf('/indicador') >= 0">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Indicadores
         </a>
@@ -51,19 +51,25 @@
           <a class="dropdown-item" routerLink="/indicador">Listar todos indicadores</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="auth.permissionList.indexOf('/permissao') >= 0">
           <a class="nav-link" routerLink="/permissao">Permissões de Telas</a>
         </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="auth.permissionList.indexOf('/relatorio') >= 0">
         <a class="nav-link" routerLink="/relatorio">Relatório de Projetos</a>
       </li>
     </ul>
-    <!--
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0" *ngIf="auth.currentUser.name">
+      <!--
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-primary my-2 my-sm-0" type="button">Search</button> .bg-light 
+      -->
+      <span style="color:#fff; line-height: 1.2">
+      <span>{{ auth.currentUser['name'] }}</span><br>
+      <small>{{ auth.currentUser['email'] }} - {{ auth.currentUser['role'] }}</small>
+      </span>
+      <button class="btn btn-secondary my-2 my-sm-0 btn-sm ml-3" type="button" (click)="onLogOut()">Sair</button> <!-- .bg-light -->
     </div>
-    -->
+
   </div>
 </nav>
 <!--

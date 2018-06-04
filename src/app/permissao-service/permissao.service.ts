@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -49,11 +49,12 @@ export class PermissaoService {
     return (error: any): Observable<T> => {
       console.error('handleError em permissao.service', error);
       // this.log(`${operation} falhou: ${error.message}`);
-      if (error.statusText == "Unknow Error") {
+      /*if (error.statusText == "Unknow Error") {
         this.messageService.error(`Falha na desconhecida na operação com o servidor.`, false);
       } else {
         this.messageService.error(`Houve uma falha na operação ${operation}`, true);
-      }
+      }*/
+      this.messageService.error(error.error.message, true);
       // retorna um resultado vazio para app continuar rodando
       return of(result as T);
     };

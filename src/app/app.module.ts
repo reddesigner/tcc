@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { LoginComponent } from './autenticar/login.component';
 import { HomeComponent } from './home/home.component';
 
 import { ProjetoListComponent } from './projeto-list/projeto-list.component';
@@ -39,7 +40,6 @@ import { PermissaoListComponent } from './permissao-list/permissao-list.componen
 import { RelatorioListComponent } from './relatorio-list/relatorio-list.component';
 
 import { MessageComponent } from './_controllers/message/component/message.component';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [

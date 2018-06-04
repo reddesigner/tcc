@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 
+import { finalize, tap } from 'rxjs/operators'
+
 import {
   HttpRequest,
+  HttpResponse,
+  HttpErrorResponse,
   HttpHandler,
   HttpEvent,
   HttpInterceptor
@@ -14,22 +18,27 @@ import { AuthService } from '../service/auth.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(public auth: AuthService) {}
+  constructor(
+    public auth: AuthService
+  ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+
+    const started = Date.now();
+    let ok: string;
+
     const serverUrl = 'http://localhost:3000/';
 
     request = request.clone({
 
       setHeaders: {
-        observe: 'response',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.auth.getToken()}`,
+        'observe': 'response',
+        'content-type': 'application/json',
+        'authorization': `Bearer ${this.auth.getToken()}`,
         'x-access-token': `${this.auth.getToken()}`
       },
       url: serverUrl + request.url,
-      
+
     });
 
     /*
@@ -39,6 +48,50 @@ export class TokenInterceptor implements HttpInterceptor {
     if POST change to: application/x-www-form-urlencoded
     };*/
 
-    return next.handle(request);
+    // return next.handle(request);
+
+    return next.handle(request)
+      .pipe(
+        tap(
+          // Succeeds when there is a response; ignore other events
+          event => { 
+            ok = event instanceof HttpResponse ? 'sucesso' : ''; 
+            console.log('auth.interceptor.ts ----- evento sucesso ', event);
+            if (event['headers']) {
+              //console.log('------------------------ --------------------- --------------------');
+              //console.log('auth.interceptor.ts -----', event['headers'].getAll('X-Powered-By'));
+              console.log('auth.interceptor.ts -----', event['headers'].getAll('x-permissions'));
+              //console.log('------------------------ --------------------- --------------------');
+              // envia as permissões para serviço de autenticação
+              this.auth.setPermissions(event['headers'].get('x-permissions'));
+            }
+          },
+          // Operation failed; error is an HttpErrorResponse
+          error => { 
+            ok = 'falhou';
+            console.error('auth.interceptor.ts ----- evento error', error); // se der erro, tipo 400, passa aqui com a msg... ler msg e decidir o que fazer...
+            if (error.message && error.message == 'Http failure response for (unknown url): 0 Unknown Error') {
+              //
+              error.error.message = "Erro desconhecido";
+              error.error.type = "error";
+              //console.error('auth.interceptor.ts ----- erro desconhecido... servidor inativo?...');
+            }
+            if (error.body && error.body.action == 'logout') {
+              // do logout
+              //console.error('auth.interceptor.ts ----- servidor manda ação customizada de logout');
+            }
+            if (error.error && error.error.type == 'error') {
+              //console.error('auth.interceptor.ts ----- Mensagem do servidor: ' + error.error.message);
+            }
+          }
+        ),
+        // Log when response observable either completes or errors
+        finalize(() => {
+          const elapsed = Date.now() - started;
+          const msg = `${request.method} "${request.urlWithParams}" ${ok} em ${elapsed} ms.`;
+          //console.log('auth.interceptor.ts ----- HTTP Response: ' + msg + ' | objeto Request:', request);
+        })
+      );
+
   }
 }

@@ -5,7 +5,6 @@ import { Router, NavigationStart } from '@angular/router';
 
 import { Message, MessageType } from '../model/message.model';
 
-
 @Injectable({
   providedIn: 'root'
 })

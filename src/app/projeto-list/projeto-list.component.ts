@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../_controllers/auth/service/auth.service';
 import { ProjetoService } from '../projeto-services/projeto.service';
 import { Projeto } from '../_models/projeto.model';
 
@@ -18,7 +19,8 @@ export class ProjetoListComponent implements OnInit {
 
   constructor(
     private projetoService: ProjetoService,
-    private route: Router
+    private router: Router,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,49 +32,49 @@ export class ProjetoListComponent implements OnInit {
     // this.projeto_list = this.projetoService.getProjetos();
     const that = this;
     this.projetoService.getProjetos().subscribe(function(projetos) {
-      console.log('projeto-list.componente getProjetos()', projetos);
+      //console.log('projeto-list.component.js --- getProjetos()', projetos);
       that.projetoList = projetos;
     });
   }
 
   onNewProject() {
-    console.log('in para um novo projeto...');
-    this.route.navigate(['/projeto/create']);
+    //console.log('projeto-list.component.js --- indo para um novo projeto...');
+    this.router.navigate(['/projeto/create']);
   }
 
   onSelectTeam(id: string) {
-    console.log('selecionar time para projeto id', id);
-    this.route.navigate(['/projeto/equipe/' + id]);
+    //console.log('projeto-list.component.js --- selecionar time para projeto id', id);
+    this.router.navigate(['/projeto/equipe/' + id]);
   }
 
   onSelectStatus(id: string) {
-    console.log('selecionar status para projeto id', id);
-    this.route.navigate(['/projeto/status/' + id]);
+    //console.log('projeto-list.component.js --- selecionar status para projeto id', id);
+    this.router.navigate(['/projeto/status/' + id]);
   }
 
   onSelectIndicators(id: string) {
-    console.log('selecionar indicadores para projeto id', id);
-    this.route.navigate(['/projeto/indicador-fase/' + id]);
+    //console.log('projeto-list.component.js --- selecionar indicadores para projeto id', id);
+    this.router.navigate(['/projeto/indicador-fase/' + id]);
   }
 
   public onSelectEditProjeto(idProjeto: string): void {
-    console.log('projeto-list.componente onSelectEditProjeto()');
-    this.route.navigate(['/projeto/edit/' + idProjeto]);
+    //console.log('projeto-list.component.js --- onSelectEditProjeto()');
+    this.router.navigate(['/projeto/edit/' + idProjeto]);
   }
 
   public onSelectDeleteProjeto(idProjeto: string): void {
-    console.log('projeto-list.componente onSelectDeleteProjeto()');
+    //console.log('projeto-list.component.js --- onSelectDeleteProjeto()');
     this.deleteProjectWait = idProjeto;
   }
 
   public onSelectDeleteOkProjeto() {
-    console.log('deletando...');
+    //console.log('projeto-list.component.js --- deletando...');
     if (this.deleteProjectWait) {
-      console.log('realmente deletando...');
+      //console.log('projeto-list.component.js --- realmente deletando...');
       // chama serviço para deletar Projeto
       this.projetoService.deleteProjeto(this.deleteProjectWait).subscribe(
         (obj) => {
-          console.log('deletado!', obj);
+          //console.log('projeto-list.component.js --- deletado!', obj);
           // o delete retorna uma msg, não um objeto do tipo que o Observable espera
           if (obj && obj['type'] && obj['type'] == 'success') {
             // atualiza lista de projetos na view
