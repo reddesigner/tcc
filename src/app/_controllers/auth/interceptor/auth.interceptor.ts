@@ -28,6 +28,8 @@ export class TokenInterceptor implements HttpInterceptor {
     let ok: string;
 
     const serverUrl = 'http://localhost:3000/';
+    //const serverUrl = 'http://localhost:4200/';
+    //const serverUrl = 'http://ec2-18-228-31-157.sa-east-1.compute.amazonaws.com:4200/';
 
     request = request.clone({
 
@@ -56,14 +58,18 @@ export class TokenInterceptor implements HttpInterceptor {
           // Succeeds when there is a response; ignore other events
           event => { 
             ok = event instanceof HttpResponse ? 'sucesso' : ''; 
-            console.log('auth.interceptor.ts ----- evento sucesso ', event);
+            //console.log('auth.interceptor.ts ----- evento sucesso ', event);
             if (event['headers']) {
               //console.log('------------------------ --------------------- --------------------');
               //console.log('auth.interceptor.ts -----', event['headers'].getAll('X-Powered-By'));
-              console.log('auth.interceptor.ts -----', event['headers'].getAll('x-permissions'));
+              //console.log('auth.interceptor.ts -----', event['headers'].getAll('x-permissions'));
+              //console.log('auth.interceptor.ts -----', event['headers'].getAll('x-refresh'));
               //console.log('------------------------ --------------------- --------------------');
               // envia as permissões para serviço de autenticação
-              this.auth.setPermissions(event['headers'].get('x-permissions'));
+              if (event['headers'].get('x-permissions'))
+                this.auth.setPermissions(event['headers'].get('x-permissions'));
+              if (event['headers'].get('x-refresh'))
+                this.auth.setToken(event['headers'].get('x-refresh'));
             }
           },
           // Operation failed; error is an HttpErrorResponse

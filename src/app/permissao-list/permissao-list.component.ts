@@ -30,10 +30,10 @@ export class PermissaoListComponent implements OnInit {
 
   public viewRoles = [
     { title: 'Administrador', role: 'Administrador' },
-    { title: 'Diretor', role: 'director' },
-    { title: 'Líder do Escritório de Projetos', role: 'team principal' },
+    { title: 'Diretor', role: 'Diretor' },
+    { title: 'Líder do Escritório de Projetos', role: 'Líder do Escritório de Projetos' },
     { title: 'Gerente de Projeto', role: 'Gerente de Projeto' },
-    { title: 'Líder de Time', role: 'team leader' }
+    { title: 'Líder de Time', role: 'Líder de Time' }
   ];
   
   @ViewChild('chRoleAdmin_1') chRoleAdmin_1;

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { Router } from '@angular/router';
+
 import { MessageService } from '../../message/service/message.service';
 // import { decode } from 'jwt-decode';
 // jwt-code de angular2-jwt (instalado com npm) não funcionou!
@@ -15,24 +17,92 @@ import { MessageService } from '../../message/service/message.service';
 export class AuthService {
 
   //public isLoggedIn = false;
+  public currenToken: string;
   public currentUser = [];
   public permissionList = [];
   public redirectUrl: string;
+
+  public timer;
 
   private authUrl = 'api/autenticar';
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
+  // descodifica o token (JWT)
+  public parseJwt(token: string) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+  };
+
+  // verifica a data EXP do token com data local atual
+  public isExpired(token: any) {
+    // TODO este modelo está comparando data do servidor com data local... 
+    // deve haver um jeito melhor... creio que é preciso grava a data de quando o token é recebido...
+    //console.log('auth.service.ts --------------------------', token.exp);
+    if (new Date().getTime() > (token.exp * 1000)) {
+      //console.log('auth.service.ts -----------------------------------------> token expirado!', new Date().getTime() - (token.exp * 1000));
+      return true;
+    } else {
+      //console.log(token);
+      //console.log('auth.service.ts -----------------------------------------> token válido ainda...', new Date().getTime() - (token.exp * 1000));
+      //console.log(new Date().getTime());
+      //console.log(token.exp * 1000);
+      return false;
+    }
+  };
+
   public getToken(): string {
-    const tk = localStorage.getItem('x-token');
-    // TODO mehor a forma de tratar os 'tokens'... 
-    this.currentUser['name'] = localStorage.getItem('x-name');
-    this.currentUser['email'] = localStorage.getItem('x-email');
-    this.currentUser['role'] = localStorage.getItem('x-role');
-    return  tk ? tk : '';
+    let tk;
+    if (this.currenToken)
+      tk = this.currenToken;
+    else
+      tk = localStorage.getItem('x-token');
+    //
+    if (tk) {
+      //console.log('auth.service.ts ----- o token, recuperado do local storage, decodificado', this.parseJwt(tk));
+      let parse = this.parseJwt(tk)
+      if (this.isExpired(parse)) {
+        this.logout();
+        return '';
+      }
+      this.currentUser['name'] = parse.name;
+      this.currentUser['email'] = parse.email;
+      this.currentUser['role'] = parse.role;
+      this.currenToken = tk;
+      //
+      //
+      this.timer = setInterval(
+        (tm) => {
+          if (this.currenToken) {
+            if (this.isExpired(this.parseJwt(this.currenToken))) {
+              //console.log('token expirado.......');
+              clearInterval(this.timer);
+              this.logout();
+              this.router.navigate(['/login']);
+              this.messageService.info('Usuário desligado por inatividade', false);
+            }
+            //console.log('token NÃO expirado.......');
+          }
+        },
+        1000 * 60 * 5 // 5 min
+      );
+      //
+      //
+      return tk;
+    } else {
+      return '';
+    }
+    //return  tk ? tk : '';
+  }
+
+  public setToken(token: string) {
+    localStorage.setItem('x-token', token);
+    this.currenToken = token;
   }
 
   public isAuthenticated(): boolean {
@@ -73,10 +143,7 @@ export class AuthService {
           //console.log('auth.service.ts ----- to aqui no login', obj);
           //this.isLoggedIn = true;
           const tk = obj['x-access-token'];
-          localStorage.setItem('x-token', tk);
-          localStorage.setItem('x-name', obj['x-user-name']);
-          localStorage.setItem('x-email', obj['x-user-email']);
-          localStorage.setItem('x-role', obj['x-user-role']);
+          this.setToken(tk);
           this.currentUser['name'] = obj['x-user-name'];
           this.currentUser['email'] = obj['x-user-email'];
           this.currentUser['role'] = obj['x-user-role'];
@@ -91,10 +158,9 @@ export class AuthService {
     //console.log('auth.service.ts ----- logout');
     localStorage.removeItem('x-token');
     localStorage.removeItem('x-permissions');
-    localStorage.removeItem('x-name');
-    localStorage.removeItem('x-email');
-    localStorage.removeItem('x-role');
+    this.permissionList = [];
     this.currentUser = [];
+    this.currenToken = '';
   }
 
   private handleError<T>(operation = 'Operação', result?: T) {

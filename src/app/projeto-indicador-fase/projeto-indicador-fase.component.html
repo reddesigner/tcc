@@ -34,7 +34,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind1 of projetoIndicadoresSelecionadosF1">
                         <div>
                             <h6 class="mt-2"><b>{{ind1.name}}</b></h6>
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                               <div class="col-5">
                                 <div class="form-group">
                                   <label class="small">Valor</label>
@@ -42,17 +42,19 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-1">
                               <div class="col-12">
                                   <label class="small">Valores limítrofes (para controle do indicador)</label>
                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind1.min">
+                                    <!--<input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind1.min">-->
+                                    Mínimo: {{ind1.min}}
                                 </div>
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind1.max">
+                                    <!--<input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind1.max">-->
+                                    Máximo: {{ind1.max}}
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -106,7 +108,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind2 of projetoIndicadoresSelecionadosF2">
                         <div>
                             <h6 class="mt-2"><b>{{ind2.name}}</b></h6>
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                               <div class="col-5">
                                 <div class="form-group">
                                   <label class="small">Valor</label>
@@ -114,17 +116,19 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-1">
                               <div class="col-12">
                                   <label class="small">Valores limítrofes (para controle do indicador)</label>
                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind2.min">
+                                    <!--<input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind2.min">-->
+                                    Mínimo: {{ind2.min}}
                                 </div>
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind2.max">
+                                    <!--<input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind2.max">-->
+                                    Máximo: {{ind2.max}}
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -178,7 +182,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind3 of projetoIndicadoresSelecionadosF3">
                         <div>
                             <h6 class="mt-2"><b>{{ind3.name}}</b></h6>
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                               <div class="col-5">
                                 <div class="form-group">
                                   <label class="small">Valor</label>
@@ -186,17 +190,19 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-1">
                               <div class="col-12">
                                   <label class="small">Valores limítrofes (para controle do indicador)</label>
                               </div>
                             </div>
                             <div class="row">
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind3.min">
+                                    <!--<input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind3.min">-->
+                                    Mínimo: {{ind3.min}}
                                 </div>
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind3.max">
+                                    <!--<input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind3.max">-->
+                                    Máximo: {{ind3.max}}
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -250,7 +256,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let ind4 of projetoIndicadoresSelecionadosF4">
                         <div>
                             <h6 class="mt-2"><b>{{ind4.name}}</b></h6>
-                            <div class="row mt-4">
+                            <div class="row mt-3">
                               <div class="col-5">
                                 <div class="form-group">
                                   <label class="small">Valor</label>
@@ -258,17 +264,19 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row">
                               <div class="col-12">
                                   <label class="small">Valores limítrofes (para controle do indicador)</label>
                               </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-1">
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind4.min">
+                                    <!--<input class="form-control form-control-sm" placeholder="Mínimo" type="text" [(ngModel)]="ind4.min">-->
+                                    Mínimo: {{ind4.min}}
                                 </div>
                                 <div class="col-5">
-                                    <input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind4.max">
+                                    <!--<input class="form-control form-control-sm" placeholder="Máximo" type="text" [(ngModel)]="ind4.max">-->
+                                    Máximo: {{ind4.max}}
                                 </div>
                                 <div class="col-2"></div>
                             </div>

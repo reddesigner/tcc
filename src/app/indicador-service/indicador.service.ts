@@ -35,7 +35,7 @@ export class IndicadorService {
     return this.http.get<Indicador>(this.indicadoresApiUrl + '/' + id).pipe(
       tap(
         () => {
-          console.log('indicador.service --- TAP: editando indicador...');
+          //console.log('indicador.service --- TAP: editando indicador...');
       }),
       catchError(this.handleError<Indicador>('getIndicadorById'))
     );
@@ -88,7 +88,10 @@ export class IndicadorService {
       // console.error('handleError em indicador.service', error);
       this.log(`${operation} falhou: ${error.message}`);
       // this.message.error(`Houve uma falha na operação ${operation}`, true);
-      this.message.error(error.error.message, true);
+      if (error.error.message)
+        this.message.error(error.error.message, true);
+      else
+        this.message.error('Erro não identificado. [ind.ser.'+operation+']', true);
       // retorna um resultado vazio para app continuar rodando
       return of(result as T);
     };

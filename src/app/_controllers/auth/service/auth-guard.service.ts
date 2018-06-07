@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate {
 
   public checkLogIn(url: string): boolean {
     if (this.auth.isAuthenticated()) {
-      console.log('authGuard.service ----- is logged in | has permission:', this.auth.getPermissionForRoute(url));
+      //console.log('authGuard.service ----- está autenticado | tem permissão em:', this.auth.getPermissionForRoute(url));
       // checar se tem a permissão...
       if (this.auth.getPermissionForRoute(url))
         return true;

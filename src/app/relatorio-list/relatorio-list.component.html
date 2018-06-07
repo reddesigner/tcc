@@ -119,25 +119,29 @@
           <td style="border-top: none">
             <div class="small">Fase 1:</div>
             <div *ngFor="let ind of item.phases.phase1">
-              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+              {{ ind.name }}: {{ ind.value }}
+              <div class="small mb-2">mínimo: {{ ind.min }} | máximo: {{ ind.max }}</div>
             </div>
           </td>
           <td style="border-top: none">
             <div class="small">Fase 2:</div>
             <div *ngFor="let ind of item.phases.phase2">
-              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+              {{ ind.name }}: {{ ind.value }}
+              <div class="small mb-2">mínimo: {{ ind.min }} | máximo: {{ ind.max }}</div>
             </div>
           </td>
           <td style="border-top: none">
             <div class="small">Fase 3:</div>
             <div *ngFor="let ind of item.phases.phase3">
-              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+              {{ ind.name }}: {{ ind.value }}
+              <div class="small mb-2">mínimo: {{ ind.min }} | máximo: {{ ind.max }}</div>
             </div>
           </td>
           <td style="border-top: none">
             <div class="small">Fase 4:</div>
             <div *ngFor="let ind of item.phases.phase4">
-              {{ ind.name }} - {{ ind.value }} - {{ ind.min }} - {{ ind.max }}
+              {{ ind.name }}: {{ ind.value }}
+              <div class="small mb-2">mínimo: {{ ind.min }} | máximo: {{ ind.max }}</div>
             </div>
           </td>
         </tr>

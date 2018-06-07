@@ -12,6 +12,7 @@ import { MessageService } from '../_controllers/message/service/message.service'
 import { ProjetoService } from '../projeto-services/projeto.service';
 
 import { Projeto } from '../_models/projeto.model';
+import { Usuario } from '../_models/usuarios.model';
 
 @Component({
   selector: 'app-projeto-edit',
@@ -21,6 +22,7 @@ import { Projeto } from '../_models/projeto.model';
 export class ProjetoEditComponent implements OnInit {
 
   public currentProject: Projeto = new Projeto();
+  public listUsers: Usuario[]; // usuários c/ perfil de gerente
 
   public disbleJustification = true;
 
@@ -57,7 +59,7 @@ export class ProjetoEditComponent implements OnInit {
     this.projetoService.getProjetoById(id).subscribe(
       prj => {
         this.currentProject = prj;
-        console.log(this.currentProject);
+        //console.log('projeto-edit.componente.ts ----- ', this.currentProject);
         // formatar e imprimir datas
         if (this.currentProject.dateStart) {
           let ds = new Date(this.currentProject.dateStart);
@@ -82,6 +84,20 @@ export class ProjetoEditComponent implements OnInit {
         }
       }
     );
+    //
+    this.getManagers();
+  }
+
+  getManagers() {
+    this.projetoService.getGerentes().subscribe(
+      (obj) => {
+        this.listUsers = obj;
+      }
+    );
+  }
+
+  byId(item1: Usuario, item2: Usuario) {
+    return item1._id === item2._id;
   }
 
   onSave() {
@@ -108,9 +124,9 @@ export class ProjetoEditComponent implements OnInit {
       this.currentProject.datePrevision = new Date(this.formatDate(this.datePrevision.nativeElement.value));
     this.currentProject.risk = this.selectRisk.nativeElement.value;
     this.currentProject.status = this.selectStatus.nativeElement.value;
-    console.log(this.currentProject);
+    console.log('projeto-edit.component.ts ---- projeto antes de ser salvo', this.currentProject);
     if (!this.disbleJustification && this.currentProject.justification == undefined) {
-      console.log('É necessário escrever uma justificativa');
+      console.log('projeto-edit.componente.ts ----- É necessário escrever uma justificativa');
       this.message.warning('Essa mudança de status exige que uma justificativa seja informada');
       return false;
       // TODO mandar tbm o usuario e a data da alteração de status!!!!!!!!!! tenho que pegar o usuário logado!!!!!!!!!!!

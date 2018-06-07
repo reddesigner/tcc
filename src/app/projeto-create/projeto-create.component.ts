@@ -10,6 +10,7 @@ import { MessageService } from '../_controllers/message/service/message.service'
 import { ProjetoService } from '../projeto-services/projeto.service';
 
 import { Projeto } from '../_models/projeto.model';
+import { Usuario } from '../_models/usuarios.model';
 
 @Component({
   selector: 'app-projeto-create',
@@ -19,6 +20,7 @@ import { Projeto } from '../_models/projeto.model';
 export class ProjetoCreateComponent implements OnInit {
 
   public newProject: Projeto = new Projeto();
+  public listUsers: Usuario[];
 
   @ViewChild('dateStart') dateStart;
   @ViewChild('datePrevision') datePrevision;
@@ -26,6 +28,7 @@ export class ProjetoCreateComponent implements OnInit {
 
   @ViewChild('selectRisk') selectRisk;
   @ViewChild('selectStatus') selectStatus;
+  @ViewChild('selectManager') selectManager;
   
   constructor(
     private projetoService: ProjetoService,
@@ -39,6 +42,15 @@ export class ProjetoCreateComponent implements OnInit {
       language: 'pt-BR'
     });
     //
+    this.getManagers();
+  }
+
+  getManagers() {
+    this.projetoService.getGerentes().subscribe(
+      (obj) => {
+        this.listUsers = obj;
+      }
+    );
   }
 
   onSave() {
@@ -65,7 +77,12 @@ export class ProjetoCreateComponent implements OnInit {
       this.newProject.datePrevision = new Date(this.formatDate(this.datePrevision.nativeElement.value));
     this.newProject.risk = this.selectRisk.nativeElement.value;
     this.newProject.status = this.selectStatus.nativeElement.value;
-    console.log(this.newProject);
+    this.newProject.manager = { 
+      _id: this.selectManager.nativeElement.value, 
+      name: this.selectManager.nativeElement.selectedOptions[0].dataset.name, 
+      email: this.selectManager.nativeElement.selectedOptions[0].dataset.email,
+      role: this.selectManager.nativeElement.selectedOptions[0].dataset.role
+    };
     //
     return true;
   }

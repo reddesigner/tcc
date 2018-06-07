@@ -45,6 +45,18 @@
                 <textarea class="form-control" [(ngModel)]="currentProject.description"></textarea>
             </div>
         </div>
+        <div class="col-2"></div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Gerente</label>
+                <select class="form-control custom-select" [compareWith]="byId" [(ngModel)]="currentProject.manager">
+                    <option></option>
+                    <ng-template [ngIf]="listUsers">
+                        <option *ngFor="let c of listUsers" [ngValue]="c">{{c.name}}</option>
+                    </ng-template>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-4">

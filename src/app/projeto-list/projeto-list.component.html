@@ -63,9 +63,9 @@
           </td>
           <td>
             <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicators(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-indicador') >= 0">
-              relacionar indicadores do projeto
+              relacionar indicadores ao projeto
             </button>
-            <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicators(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-indicador-fase') >= 0">
+            <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicatorsPhases(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-indicador-fase') >= 0">
               gerir indicadores por fases
             </button>
           </td>
@@ -75,11 +75,11 @@
             </button>
           </td>
           <td>
-            <button type="button" class="btn btn-default" (click)="onSelectEditProjeto(projeto._id)">
+            <button type="button" class="btn btn-default btn-sm" (click)="onSelectEditProjeto(projeto._id)">
               editar
             </button>
             &nbsp;
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
               excluir
             </button>
           </td>
@@ -93,19 +93,21 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+  <!--
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onDeselectDeleteOkProjeto()">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
+  -->
     <div class="modal-body">
         Deseja realmente excluir este Projeto?
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onDeselectDeleteOkProjeto()">Cancelar</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="onDeselectDeleteOkProjeto()">Cancelar</button>
         &nbsp;
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">Excluir</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">Excluir</button>
     </div>
     </div>
   </div>

@@ -45,6 +45,16 @@
                 <textarea class="form-control" [(ngModel)]="newProject.description"></textarea>
             </div>
         </div>
+        <div class="col-2"></div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Gerente</label>
+                <select class="form-control custom-select" #selectManager>
+                    <option value=''></option>
+                    <option *ngFor="let user of listUsers" value="{{user._id}}" [attr.data-name]="user.name" [attr.data-email]="user.email" [attr.data-role]="user.role">{{user.name}}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-4">

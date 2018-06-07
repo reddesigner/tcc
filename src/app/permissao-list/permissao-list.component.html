@@ -54,7 +54,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <ng-container *ngIf="oneview.role.indexOf('director')!==-1; else otherDirector_1">
+                                    <ng-container *ngIf="oneview.role.indexOf('Diretor')!==-1; else otherDirector_1">
                                         <input type="checkbox" checked class="custom-control-input" id="role_1_2" name="role[]" #chRoleDirector_1>
                                     </ng-container>
                                     <ng-template #otherDirector_1>
@@ -65,7 +65,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <ng-container *ngIf="oneview.role.indexOf('team principal')!==-1; else otherPrincipal_1">
+                                    <ng-container *ngIf="oneview.role.indexOf('Líder do Escritório de Projetos')!==-1; else otherPrincipal_1">
                                         <input type="checkbox" checked class="custom-control-input" id="role_1_3" name="role[]" #chRolePrincipal_1>
                                     </ng-container>
                                     <ng-template #otherPrincipal_1>
@@ -87,7 +87,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div class="custom-control custom-checkbox mr-sm-2">
-                                    <ng-container *ngIf="oneview.role.indexOf('team leader')!==-1; else otherLeader_1">
+                                    <ng-container *ngIf="oneview.role.indexOf('Líder de Time')!==-1; else otherLeader_1">
                                         <input type="checkbox" checked class="custom-control-input" id="role_1_5" name="role[]" #chRoleLeader_1>
                                     </ng-container>
                                     <ng-template #otherLeader_1>

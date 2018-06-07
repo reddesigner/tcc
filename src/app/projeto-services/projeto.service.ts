@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from '../_controllers/message/service/message.service';
 
 import { Projeto } from '../_models/projeto.model';
+import { Usuario } from '../_models/usuarios.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,9 @@ export class ProjetoService {
 
   private projetoURL = 'api/projeto';
   private projetoEquipeURL = 'api/projeto-equipe';
+  private projetoIndicadorURL = 'api/projeto-indicador';
   private projetoIndicadorFaseURL = 'api/projeto-indicador-fase';
+  private projetoManagerURL = 'api/projeto/manager';
 
   constructor(
     private http: HttpClient,
@@ -27,6 +30,13 @@ export class ProjetoService {
     return this.http.get<Projeto[]>( this.projetoURL).pipe(
       tap( () => {} ),
       catchError(this.handleError('getProjetos', []))
+    );
+  }
+
+  getGerentes(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>( this.projetoManagerURL).pipe(
+      tap( () => {} ),
+      catchError(this.handleError('getGerentes', []))
     );
   }
 
@@ -56,6 +66,9 @@ export class ProjetoService {
       break;
       case 'equipe':
         putProjetoUrl = this.projetoEquipeURL;
+      break;
+      case 'indicador':
+        putProjetoUrl = this.projetoIndicadorURL;
       break;
       case 'indicador-fase':
         putProjetoUrl = this.projetoIndicadorFaseURL;
@@ -90,10 +103,13 @@ export class ProjetoService {
 
   private handleError<T>(operation = 'Operação ', result?: T) {
       return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
+      console.error('projeto.service.ts ----- ' ,error); // log to console instead
       this.log(`${operation} falhou: ${error.message}`);
       // this.message.error(`${operation} falhou: ${error.message}`, true);
-      this.message.error(error.error.message, true);
+      if (error.error && error.error.message)
+        this.message.error(error.error.message, true);
+      else
+        this.message.error('Erro não identificado. [pro.sev.'+operation+']', true);
       return of(result as T);
     };
   }

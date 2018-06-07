@@ -41,7 +41,7 @@ export class ProjetoEquipeComponent implements OnInit {
       (prj) => {
         this.projetoRef = prj;
         this.projetoUsuariosAlocados = prj.team;
-        console.log('get projeto', prj);
+        console.log('projeto-equipe.component.ts ----- get projeto', prj);
         this.checkAlocadosDisponiveis();
       }
     );
@@ -51,7 +51,7 @@ export class ProjetoEquipeComponent implements OnInit {
     this.usuarioService.getUsuarios().subscribe(
       (usrs) => {
         this.usuarioRef = usrs;
-        console.log('get usuarios', usrs);
+        console.log('projeto-equipe.component.ts ----- get usuarios', usrs);
         this.checkAlocadosDisponiveis();
       }
     );
@@ -61,7 +61,7 @@ export class ProjetoEquipeComponent implements OnInit {
     this.projetoRef.team = this.projetoUsuariosAlocados;
     this.projetoService.putProjeto(this.projetoRef, 'equipe').subscribe(
       (prj) => {
-        console.log('projeto editado', prj)
+        console.log('projeto-equipe.component.ts ----- projeto editado', prj)
         if (this.projetoRef.team.length == 0) {
           this.message.warning('Nenhum projeto deveria ficar sem time', false);
         }

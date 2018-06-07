@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../_controllers/message/service/message.service';
 
 import { ProjetoService } from '../projeto-services/projeto.service';
-import { IndicadorService } from '../indicador-service/indicador.service';
+//import { IndicadorService } from '../indicador-service/indicador.service';
 
 import { Projeto } from '../_models/projeto.model';
 import { Indicador } from '../_models/indicador.model';
@@ -29,7 +29,7 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
 
   constructor(
     private projetoService: ProjetoService,
-    private indicadorService: IndicadorService,
+    //private indicadorService: IndicadorService,
     private route: ActivatedRoute,
     private location: Location,
     private message: MessageService
@@ -37,7 +37,7 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
 
   ngOnInit() {
     this.getProjetoById();
-    this.getIndicadores();
+    //this.getIndicadores();
   }
 
   getProjetoById() {
@@ -50,13 +50,18 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
         this.projetoIndicadoresSelecionadosF2 = prj.phases['phase2'];
         this.projetoIndicadoresSelecionadosF3 = prj.phases['phase3'];
         this.projetoIndicadoresSelecionadosF4 = prj.phases['phase4'];
+        // JSON.stringfy() é usado aqui para criar clones de prj.indicators
+        this.indicadoresRef1 = JSON.parse(JSON.stringify(prj.indicators));
+        this.indicadoresRef2 = JSON.parse(JSON.stringify(prj.indicators));
+        this.indicadoresRef3 = JSON.parse(JSON.stringify(prj.indicators));
+        this.indicadoresRef4 = JSON.parse(JSON.stringify(prj.indicators));
         console.log('get projeto', prj);
-        this.checkSelecionadosDisponiveis();
+        //this.checkSelecionadosDisponiveis();
       }
     );
   }
 
-  getIndicadores() {
+  /*getIndicadores() {
     this.indicadorService.getIndicadores().subscribe(
       (inds) => {
         // usar JSON.parse(JSON.stringify(inds)); para criar 'clones' de inds
@@ -68,7 +73,7 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
         this.checkSelecionadosDisponiveis();
       }
     );
-  }
+  }*/
 
   onSave() {
     this.projetoRef.phases['phase1'] = this.projetoIndicadoresSelecionadosF1;
@@ -171,7 +176,7 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
     }
   }
 
-  checkSelecionadosDisponiveis() {
+  /*checkSelecionadosDisponiveis() {
     // é chamada pelos métodos que recebem requisições
     // é verificado se as duas já foram feitas, então executa a compraração
     if (this.projetoRef._id !== '' && this.projetoRef._id !== undefined && this.indicadoresRef4.length > 0) {
@@ -207,6 +212,6 @@ export class ProjetoIndicadorFaseComponent implements OnInit {
       }
       //
     }
-  }
+  }*/
 
 }

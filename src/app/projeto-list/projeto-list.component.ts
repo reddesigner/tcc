@@ -54,6 +54,11 @@ export class ProjetoListComponent implements OnInit {
 
   onSelectIndicators(id: string) {
     //console.log('projeto-list.component.js --- selecionar indicadores para projeto id', id);
+    this.router.navigate(['/projeto/indicador/' + id]);
+  }
+
+  onSelectIndicatorsPhases(id: string) {
+    //console.log('projeto-list.component.js --- selecionar indicadores para projeto id', id);
     this.router.navigate(['/projeto/indicador-fase/' + id]);
   }
 
