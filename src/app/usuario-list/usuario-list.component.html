@@ -59,11 +59,11 @@
           <td>{{ usuario.role }}</td>
           <td>
             <button type="button" class="btn btn-default btn-sm" (click)="onSelectUsuario(usuario._id)">
-              editar
+                <img alt="editar" src="/assets/svg/edit.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline"> editar</span>
             </button>
             &nbsp;
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onDeleteUsuario(usuario._id)">
-              excluir
+                <img alt="editar" src="/assets/svg/garbage-w.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline"> excluir</span>
             </button>
           </td>
         </tr>
@@ -89,7 +89,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="onConfirmDeleteUsuario()">Excluir</button>
+            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="onConfirmDeleteUsuario()">
+                <img alt="editar" src="/assets/svg/garbage-w.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline"> excluir</span>
+            </button>
         </div>
         </div>
     </div>

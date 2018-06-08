@@ -1,3 +1,13 @@
 .table tbody {
     border-top: 3px solid #bec2c6; /* #dee2e6; */
 }
+
+.row {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+.row.c {
+    margin-bottom: 0;
+    border-bottom: none;
+}

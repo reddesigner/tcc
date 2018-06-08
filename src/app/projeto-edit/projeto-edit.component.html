@@ -10,7 +10,7 @@
   <!--<small>Líder do Escritório de Projetos</small>-->
   <hr>
     <div class="row">
-        <div class="col-6">
+            <div class="col-12 col-md-8 col-lg-6">
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" [(ngModel)]="currentProject.name">
@@ -18,35 +18,45 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>Data de Início</label>
+                <div class="datepicker-set">
                 <input class="form-control datepicker" readonly style="background: #fff" value="{{initDateStart}}" #dateStart>
+                <button class="datepicker-clear">&times;</button>
+                </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>Data de Previsão de Términio</label>
+                <div class="datepicker-set">
                 <input class="form-control datepicker" readonly style="background: #fff" value="{{initDatePrevision}}" #datePrevision>
+                <button class="datepicker-clear">&times;</button>
+                </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="form-group">
                 <label>Data <b>real</b> de Téminio</label>
+                <div class="datepicker-set">
                 <input class="form-control datepicker" readonly style="background: #fff" value="{{initDateEnd}}" #dateEnd>
+                <button class="datepicker-clear">&times;</button>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-10 col-lg-8">
             <div class="form-group">
                 <label>Descrição</label>
                 <textarea class="form-control" [(ngModel)]="currentProject.description"></textarea>
             </div>
         </div>
-        <div class="col-2"></div>
-        <div class="col-4">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="form-group">
                 <label>Gerente</label>
                 <select class="form-control custom-select" [compareWith]="byId" [(ngModel)]="currentProject.manager">
@@ -59,13 +69,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-6">
             <div class="form-group">
                 <label>Orçamento</label>
                 <input type="text" class="form-control" [(ngModel)]="currentProject.budget">
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-6">
             <div class="form-group">
                 <label>Riscos</label>
                 <select class="form-control custom-select" #selectRisk>
@@ -78,7 +88,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-6">
             <div class="form-group">
                 <label>Status</label>
                 <select class="form-control custom-select" #selectStatus (change)="changeStatus($event)">
@@ -93,7 +103,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div class="form-group">
                 <label>Justificativa de mudança de Status</label>
                 <textarea class="form-control" [(ngModel)]="currentProject.justification" [disabled]="disbleJustification"></textarea>

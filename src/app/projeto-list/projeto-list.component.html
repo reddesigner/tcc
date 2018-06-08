@@ -55,32 +55,32 @@
         <tr *ngFor="let projeto of projetoList">
           <td>{{projeto.name}}</td>
           <td>
-             {{ projeto.team.length > 0 ? ( projeto.team.length > 1 ? projeto.team.length+' membros' : '1 membro' ) : 'Sem equipe' }}
-             &nbsp;
              <button type="button" class="btn btn-default btn-sm" (click)="onSelectTeam(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-equipe') >= 0">
-              gerir equipe
-            </button>           
+              <img alt="editar" src="/assets/svg/group.svg" style="width: 24px; height: 20px;" alt="editar" title="editar" />
+            </button>
+            <span class="d-none d-md-inline"> {{ projeto.team.length > 0 ? ( projeto.team.length > 1 ? projeto.team.length+' membros' : '1 membro' ) : 'Sem equipe' }}</span>
           </td>
           <td>
             <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicators(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-indicador') >= 0">
-              relacionar indicadores ao projeto
+              <img alt="editar" src="/assets/svg/line-chart-s.svg" style="width: 18px; height:20px;" alt="relacionar" title="relacionar" /> <span class="d-none d-md-inline"> relacionar</span>
             </button>
+            &nbsp;
             <button type="button" class="btn btn-default btn-sm" (click)="onSelectIndicatorsPhases(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-indicador-fase') >= 0">
-              gerir indicadores por fases
+              <img alt="editar" src="/assets/svg/line-chart.svg" style="width: 18px; height: 20px;" alt="indicadores por fase" title="indicadores por fase" /> <span class="d-none d-md-inline"> gerir indicadores por fases</span>
             </button>
           </td>
           <td>
             <button type="button" class="btn btn-default btn-sm" (click)="onSelectStatus(projeto._id)" *ngIf="auth.permissionList.indexOf('/projeto-status') >= 0">
-              gerir status
+              <span>status</span>
             </button>
           </td>
           <td>
-            <button type="button" class="btn btn-default btn-sm" (click)="onSelectEditProjeto(projeto._id)">
-              editar
+            <button type="button" class="btn btn-default btn-sm" alt="editar" title="editar" (click)="onSelectEditProjeto(projeto._id)">
+              <img alt="editar" src="/assets/svg/edit.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline">editar</span>
             </button>
             &nbsp;
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onSelectDeleteProjeto(projeto._id)">
-              excluir
+                <img alt="editar" src="/assets/svg/garbage-w.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline">exlcuir</span>
             </button>
           </td>
         </tr>
@@ -107,7 +107,9 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="onDeselectDeleteOkProjeto()">Cancelar</button>
         &nbsp;
-        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">Excluir</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="onSelectDeleteOkProjeto()">
+            <img alt="editar" src="/assets/svg/garbage-w.svg" style="width: 18px; height: 20px;" alt="editar" title="editar" /> <span class="d-none d-md-inline"> excluir</span>
+        </button>
     </div>
     </div>
   </div>

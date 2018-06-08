@@ -41,6 +41,9 @@ export class ProjetoCreateComponent implements OnInit {
       format: 'dd/mm/yyyy',
       language: 'pt-BR'
     });
+    $('.datepicker-clear').on('click', function(){
+      $(this).prev().datepicker('setDate', null);
+    });
     //
     this.getManagers();
   }

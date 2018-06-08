@@ -27,9 +27,9 @@ export class TokenInterceptor implements HttpInterceptor {
     const started = Date.now();
     let ok: string;
 
-    const serverUrl = 'http://localhost:3000/';
+    //const serverUrl = 'http://localhost:3000/';
     //const serverUrl = 'http://localhost:4200/';
-    //const serverUrl = 'http://ec2-18-228-31-157.sa-east-1.compute.amazonaws.com:4200/';
+    const serverUrl = 'http://ec2-18-228-31-157.sa-east-1.compute.amazonaws.com:4200/';
 
     request = request.clone({
 

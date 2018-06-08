@@ -10,7 +10,7 @@
 	<hr>
     <form #insertForm="ngForm" (ngSubmit)="onSubmit()">
 	<div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="form-group">
                 <label>Nome</label>
                 <input type="text" class="form-control" [(ngModel)]="newUser.name" name="name" #name="ngModel" required>
@@ -22,7 +22,7 @@
         </div>
     </div>
 	<div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="form-group">
                 <label>Email</label>
                 <input type="text" class="form-control" [(ngModel)]="newUser.email" name="email" #email="ngModel" required>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="form-group">
                 <label>Confirme o email</label>
                 <input type="text" class="form-control" [(ngModel)]="confirmMail" name="emailconfirm" #emailconfirm="ngModel" required>
@@ -76,7 +76,7 @@
     </div>
     -->
     <div class="row mt-3">
-        <div class="col-4">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="form-group">
                 <label>Perfíl</label>
                 <select class="form-control custom-select" [(ngModel)]="newUser.role"  name="perfil" #perfil="ngModel" required>

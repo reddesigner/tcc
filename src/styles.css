@@ -26,3 +26,23 @@ footer {
 
 /* - */
 
+.datepicker-set {
+  position: relative
+}
+.datepicker-clear {
+  border: none;
+  background: transparent;
+  position: absolute;
+  margin-top: 4px;
+  margin-right: 4px;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: 50%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+  height: 25px;
+  line-height: 1;
+  cursor: pointer;
+}

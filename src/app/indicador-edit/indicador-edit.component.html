@@ -14,7 +14,7 @@
     -->
       <form #editForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-8 col-lg-4">
                 <div class="form-group">
                     <label class="form">Nome</label>
                     <input type="text" class="form-control" [(ngModel)]="indicadorEdit.name" name="name" #name="ngModel" required maxlength="30">

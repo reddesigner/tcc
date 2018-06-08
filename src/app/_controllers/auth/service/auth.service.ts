@@ -63,7 +63,7 @@ export class AuthService {
     else
       tk = localStorage.getItem('x-token');
     //
-    if (tk) {
+    if (tk && tk != "undefined") { // por algum motivo o undefined aqui é uma string que vem do localStorage.
       //console.log('auth.service.ts ----- o token, recuperado do local storage, decodificado', this.parseJwt(tk));
       let parse = this.parseJwt(tk)
       if (this.isExpired(parse)) {
@@ -76,7 +76,7 @@ export class AuthService {
       this.currenToken = tk;
       //
       //
-      this.timer = setInterval(
+      /*this.timer = setInterval(
         (tm) => {
           if (this.currenToken) {
             if (this.isExpired(this.parseJwt(this.currenToken))) {
@@ -90,7 +90,7 @@ export class AuthService {
           }
         },
         1000 * 60 * 5 // 5 min
-      );
+      );*/
       //
       //
       return tk;
@@ -135,9 +135,8 @@ export class AuthService {
   }
 
   public login(model: any): Observable<any> {
-    const pair = model;
     //return this.http.post(this.authUrl, model);
-    return this.http.post<any>(this.authUrl, pair).pipe(
+    return this.http.post<any>(this.authUrl, model).pipe(
       tap(
         (obj) => {
           //console.log('auth.service.ts ----- to aqui no login', obj);
@@ -150,6 +149,18 @@ export class AuthService {
         }
       ),
       catchError(this.handleError<any>('login'))
+    );
+  }
+
+  public newPassword(model: any): Observable<any> {
+    //return this.http.post(this.authUrl, model);
+    return this.http.post<any>(this.authUrl, model).pipe(
+      tap(
+        (obj) => {
+          //console.log('auth.service.ts ----- to aqui no login', obj);
+        }
+      ),
+      catchError(this.handleError<any>('newPassword'))
     );
   }
 
